@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.montanhadechomsky">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.ambiente1.TelaAmbiente1"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.automatos.TelaAmbiente2"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.automatos.telas_aux.ItemTelaCriacaoAutomato"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            >
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.automatos.telas_aux.ItemTelaAtualizacaoAutomato"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            >
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.automatos.telas_aux.ItemTelaCriacaoSeta"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            >
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.automatos.telas_aux.ItemTelaAtualizacaoSeta"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            >
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.automatos.telas_aux.ItemTelaTabela"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            >
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.telas_aux.ItemTelaProblema"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.telas_aux.ItemTelaInstrucao"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.telas_aux.ItemTelaAjuda"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.telas_aux.ItemTelaExemplos"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.telas_aux.ItemTelaImagem"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.ambiente1.telas_aux.ItemTelaRespostaCorreta"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <activity android:name=".guis.tela_detalhes.TelaDetalhes"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <activity android:name=".guis.tela_ambientes.automatos.telas_aux.ItemTelaRespostaAutomato"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+    </application>
+
+</manifest>

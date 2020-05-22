@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.montanhadechomsky.MainActivity">
+    <item
+        android:id="@+id/action_detalhes"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_criar_turmas"
+        android:orderInCategory="100"
+        android:title="Criar Turmas"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_importar_turmas"
+        android:orderInCategory="100"
+        android:title="Importar Turmas"
+        app:showAsAction="never" />
+</menu>

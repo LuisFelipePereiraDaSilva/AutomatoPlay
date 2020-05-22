@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#003546</color>
+    <color name="colorPrimaryDark">#005A79</color>
+    <color name="colorAccent">#005A79</color>
+    <color name="fundo_itens_ambientes">#CC000000</color>
+    <color name="simbolos">#66ffffff</color>
+</resources>
