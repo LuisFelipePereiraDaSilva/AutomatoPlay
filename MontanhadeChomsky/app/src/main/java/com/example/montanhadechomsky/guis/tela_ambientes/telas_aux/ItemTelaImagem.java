@@ -26,7 +26,7 @@ public class ItemTelaImagem extends Activity {
             Resources resources = this.getResources();
             int resourceId = 0;
 
-            resourceId = resources.getIdentifier(imagem, "drawable", this.getPackageName());
+            resourceId = resources.getIdentifier(imagem.trim(), "drawable", this.getPackageName());
 
             img.setImageResource(resourceId);
         }catch (Exception e){
