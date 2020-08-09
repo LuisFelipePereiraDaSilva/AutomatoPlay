@@ -72,7 +72,6 @@ public class ItemTelaRespostaAutomato extends Activity implements AdapterView.On
 
             ConstraintLayout c = new ConstraintLayout(getBaseContext());
             c.setLayoutParams(tamanho);
-            //c.setBackgroundResource(R.drawable.borda_grade);
             c.setPadding(5, 5, 5, 5);
             c.setId(i);
 

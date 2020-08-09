@@ -101,7 +101,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         prencherNumerosZoom();
 
         if(GUI.getGui().getMainActivity().getAbrirTelaPrimeiraVez()) {
-            criarGrade2();
+            criarGradeAux();
             GUI.getGui().getMainActivity().setarFalsoAbrirTelaPrimeiraVez();
         }
         else
@@ -193,6 +193,105 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         });
     }
 
+    private void criarEstado(View v) {
+        int q1 = (int) v.getId() - 30; // cima
+        int q2 = (int) v.getId() + 30; // baixo
+        int q3 = (int) v.getId() - 1; // esquerda
+        int q4 = (int) v.getId() + 1; // direita
+        int q5 = q1 - 1; // diagonal esquerda cima
+        int q6 = q1 + 1; // diagonal direita cima
+        int q7 = q2 - 1; // diagonal esquerda baixo
+        int q8 = q2 + 1; // diagonal direita baixo
+        if ((q1 < 0 || (q1 >= 0 && ((ConstraintLayout) g.findViewById(q1)).getChildCount() == 0)) &&
+                (q2 < 0 || (q2 >= 0 && ((ConstraintLayout) g.findViewById(q2)).getChildCount() == 0)) &&
+                (q3 < 0 || (q3 >= 0 && ((ConstraintLayout) g.findViewById(q3)).getChildCount() == 0)) &&
+                (q4 < 0 || (q4 >= 0 && ((ConstraintLayout) g.findViewById(q4)).getChildCount() == 0)) &&
+                (q5 < 0 || (q5 >= 0 && ((ConstraintLayout) g.findViewById(q5)).getChildCount() == 0)) &&
+                (q6 < 0 || (q6 >= 0 && ((ConstraintLayout) g.findViewById(q6)).getChildCount() == 0)) &&
+                (q7 < 0 || (q7 >= 0 && ((ConstraintLayout) g.findViewById(q7)).getChildCount() == 0)) &&
+                (q8 < 0 || (q8 >= 0 && ((ConstraintLayout) g.findViewById(q8)).getChildCount() == 0))) {
+            if (quadrado_selecionado_grade != null) {
+                quadrado_selecionado_grade.setBackgroundResource(R.drawable.borda_grade);
+                quadrado_selecionado_grade = null;
+            }
+            Intent in = new Intent(TelaAmbiente2.this, ItemTelaCriacaoAutomato.class);
+            startActivity(in);
+            quadrado_selecionado_grade = (ConstraintLayout) v;
+        } else {
+            Toast.makeText(TelaAmbiente2.this, "Deixe pelo menos um quadrado de distância entre os estados",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void moverEstado(View v){
+        int q1 = (int) v.getId() - 30; // cima
+        int q2 = (int) v.getId() + 30; // baixo
+        int q3 = (int) v.getId() - 1; // esquerda
+        int q4 = (int) v.getId() + 1; // direita
+        int q5 = q1 - 1; // diagonal esquerda cima
+        int q6 = q1 + 1; // diagonal direita cima
+        int q7 = q2 - 1; // diagonal esquerda baixo
+        int q8 = q2 + 1; // diagonal direita baixo
+        if ((q1 == estado_selecionado.getId() || q1 < 0 || (q1 >= 0 && ((ConstraintLayout) g.findViewById(q1)).getChildCount() == 0)) &&
+                (q2 == estado_selecionado.getId() || q2 < 0 || (q2 >= 0 && ((ConstraintLayout) g.findViewById(q2)).getChildCount() == 0)) &&
+                (q3 == estado_selecionado.getId() || q3 < 0 || (q3 >= 0 && ((ConstraintLayout) g.findViewById(q3)).getChildCount() == 0)) &&
+                (q4 == estado_selecionado.getId() || q4 < 0 || (q4 >= 0 && ((ConstraintLayout) g.findViewById(q4)).getChildCount() == 0)) &&
+                (q5 == estado_selecionado.getId() || q5 < 0 || (q5 >= 0 && ((ConstraintLayout) g.findViewById(q5)).getChildCount() == 0)) &&
+                (q6 == estado_selecionado.getId() || q6 < 0 || (q6 >= 0 && ((ConstraintLayout) g.findViewById(q6)).getChildCount() == 0)) &&
+                (q7 == estado_selecionado.getId() || q7 < 0 || (q7 >= 0 && ((ConstraintLayout) g.findViewById(q7)).getChildCount() == 0)) &&
+                (q8 == estado_selecionado.getId() || q8 < 0 || (q8 >= 0 && ((ConstraintLayout) g.findViewById(q8)).getChildCount() == 0))) {
+            quadrado_selecionado_grade.removeAllViews();
+            ConstraintLayout c = (ConstraintLayout) v;
+            montarAutomato(c, estado_selecionado);
+            Estado estado = GUI.getGui().getItemTelaDesenhoAutomato().getEstadoAutomato(estado_selecionado.getId());
+            estado.setId(v.getId());
+
+            estado.atualizarCordenadasMinhaSeta(c.getX(), c.getY());
+            estado.setCordenadas(new float[]{c.getX(), c.getY()});
+            ArrayList<Estado> automatos = GUI.getGui().getItemTelaDesenhoAutomato().getListaEstadosAutomato();
+            for (int i = 0; i < automatos.size(); i++) {
+                estado = automatos.get(i);
+                estado.atualizarSeta(quadrado_selecionado_grade.getX(), quadrado_selecionado_grade.getY(), c.getX(), c.getY());
+            }
+            DesenharSeta view = findViewById(R.id.view_setas);
+            view.redesenharSetas();
+
+            estado_selecionado = null;
+            quadrado_selecionado_grade = null;
+            salvarRespostaSecundaria();
+            Toast.makeText(TelaAmbiente2.this, "Estado movido",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(TelaAmbiente2.this, "Deixe pelo menos um quadrado de distância entre os estados",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+    private void moverEstadoAux(View v){
+        if (estado_selecionado.getId() != v.getId())
+            Toast.makeText(TelaAmbiente2.this, "Já existe um estado nessa posição!",
+                    Toast.LENGTH_LONG).show();
+        else {
+            Toast.makeText(TelaAmbiente2.this, "Estado movido",
+                    Toast.LENGTH_LONG).show();
+            quadrado_selecionado_grade = null;
+            estado_selecionado = null;
+            salvarRespostaSecundaria();
+        }
+    }
+
+    private void atualizarEstado(View v){
+        if (((ConstraintLayout) v).getChildCount() > 0) {
+            if (quadrado_selecionado_grade != null) {
+                quadrado_selecionado_grade.setBackgroundResource(R.drawable.borda_grade);
+                quadrado_selecionado_grade = null;
+            }
+            Intent in = new Intent(TelaAmbiente2.this, ItemTelaAtualizacaoAutomato.class);
+            startActivity(in);
+            estado_selecionado = GUI.getGui().getItemTelaDesenhoAutomato().getEstadoAutomato(v.getId());
+            quadrado_selecionado_grade = (ConstraintLayout) v;
+        }
+    }
+
     private void criarGrade(){
         final ConstraintLayout.LayoutParams tamanho = new ConstraintLayout.LayoutParams
                 ((int) ConstraintLayout.LayoutParams.WRAP_CONTENT, (int) ConstraintLayout.LayoutParams.WRAP_CONTENT);
@@ -215,88 +314,13 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
                         bloquearClick = true;
                         if (((ConstraintLayout) v).getChildCount() == 0) {
                             if (estado_selecionado != null) {
-                                int q1 = (int) v.getId() - 30; // cima
-                                int q2 = (int) v.getId() + 30; // baixo
-                                int q3 = (int) v.getId() - 1; // esquerda
-                                int q4 = (int) v.getId() + 1; // direita
-                                int q5 = q1 - 1; // diagonal esquerda cima
-                                int q6 = q1 + 1; // diagonal direita cima
-                                int q7 = q2 - 1; // diagonal esquerda baixo
-                                int q8 = q2 + 1; // diagonal direita baixo
-                                if ((q1 == estado_selecionado.getId() || q1 < 0 || (q1 >= 0 && ((ConstraintLayout) g.findViewById(q1)).getChildCount() == 0)) &&
-                                        (q2 == estado_selecionado.getId() || q2 < 0 || (q2 >= 0 && ((ConstraintLayout) g.findViewById(q2)).getChildCount() == 0)) &&
-                                        (q3 == estado_selecionado.getId() || q3 < 0 || (q3 >= 0 && ((ConstraintLayout) g.findViewById(q3)).getChildCount() == 0)) &&
-                                        (q4 == estado_selecionado.getId() || q4 < 0 || (q4 >= 0 && ((ConstraintLayout) g.findViewById(q4)).getChildCount() == 0)) &&
-                                        (q5 == estado_selecionado.getId() || q5 < 0 || (q5 >= 0 && ((ConstraintLayout) g.findViewById(q5)).getChildCount() == 0)) &&
-                                        (q6 == estado_selecionado.getId() || q6 < 0 || (q6 >= 0 && ((ConstraintLayout) g.findViewById(q6)).getChildCount() == 0)) &&
-                                        (q7 == estado_selecionado.getId() || q7 < 0 || (q7 >= 0 && ((ConstraintLayout) g.findViewById(q7)).getChildCount() == 0)) &&
-                                        (q8 == estado_selecionado.getId() || q8 < 0 || (q8 >= 0 && ((ConstraintLayout) g.findViewById(q8)).getChildCount() == 0))) {
-                                    quadrado_selecionado_grade.removeAllViews();
-                                    ConstraintLayout c = (ConstraintLayout) v;
-                                    montarAutomato(c, estado_selecionado);
-                                    Estado estado = GUI.getGui().getItemTelaDesenhoAutomato().getEstadoAutomato(estado_selecionado.getId());
-                                    estado.setId(v.getId());
-
-                                    estado.atualizarCordenadasMinhaSeta(c.getX(), c.getY());
-                                    estado.setCordenadas(new float[]{c.getX(), c.getY()});
-                                    ArrayList<Estado> automatos = GUI.getGui().getItemTelaDesenhoAutomato().getListaEstadosAutomato();
-                                    for (int i = 0; i < automatos.size(); i++) {
-                                        estado = automatos.get(i);
-                                        estado.atualizarSeta(quadrado_selecionado_grade.getX(), quadrado_selecionado_grade.getY(), c.getX(), c.getY());
-                                    }
-                                    DesenharSeta view = findViewById(R.id.view_setas);
-                                    view.redesenharSetas();
-
-                                    estado_selecionado = null;
-                                    quadrado_selecionado_grade = null;
-                                    salvarRespostaSecundaria();
-                                    Toast.makeText(TelaAmbiente2.this, "Estado movido",
-                                            Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(TelaAmbiente2.this, "Deixe pelo menos um quadrado de distância entre os estados",
-                                            Toast.LENGTH_LONG).show();
-                                }
+                                moverEstado(v);
                             } else {
-                                int q1 = (int) v.getId() - 30; // cima
-                                int q2 = (int) v.getId() + 30; // baixo
-                                int q3 = (int) v.getId() - 1; // esquerda
-                                int q4 = (int) v.getId() + 1; // direita
-                                int q5 = q1 - 1; // diagonal esquerda cima
-                                int q6 = q1 + 1; // diagonal direita cima
-                                int q7 = q2 - 1; // diagonal esquerda baixo
-                                int q8 = q2 + 1; // diagonal direita baixo
-                                if ((q1 < 0 || (q1 >= 0 && ((ConstraintLayout) g.findViewById(q1)).getChildCount() == 0)) &&
-                                        (q2 < 0 || (q2 >= 0 && ((ConstraintLayout) g.findViewById(q2)).getChildCount() == 0)) &&
-                                        (q3 < 0 || (q3 >= 0 && ((ConstraintLayout) g.findViewById(q3)).getChildCount() == 0)) &&
-                                        (q4 < 0 || (q4 >= 0 && ((ConstraintLayout) g.findViewById(q4)).getChildCount() == 0)) &&
-                                        (q5 < 0 || (q5 >= 0 && ((ConstraintLayout) g.findViewById(q5)).getChildCount() == 0)) &&
-                                        (q6 < 0 || (q6 >= 0 && ((ConstraintLayout) g.findViewById(q6)).getChildCount() == 0)) &&
-                                        (q7 < 0 || (q7 >= 0 && ((ConstraintLayout) g.findViewById(q7)).getChildCount() == 0)) &&
-                                        (q8 < 0 || (q8 >= 0 && ((ConstraintLayout) g.findViewById(q8)).getChildCount() == 0))) {
-                                    if (quadrado_selecionado_grade != null) {
-                                        quadrado_selecionado_grade.setBackgroundResource(R.drawable.borda_grade);
-                                        quadrado_selecionado_grade = null;
-                                    }
-                                    Intent in = new Intent(TelaAmbiente2.this, ItemTelaCriacaoAutomato.class);
-                                    startActivity(in);
-                                    quadrado_selecionado_grade = (ConstraintLayout) v;
-                                } else {
-                                    Toast.makeText(TelaAmbiente2.this, "Deixe pelo menos um quadrado de distância entre os estados",
-                                            Toast.LENGTH_LONG).show();
-                                }
+                                criarEstado(v);
                             }
                         } else {
                             if (estado_selecionado != null)
-                                if (estado_selecionado.getId() != v.getId())
-                                    Toast.makeText(TelaAmbiente2.this, "Já existe um estado nessa posição!",
-                                            Toast.LENGTH_LONG).show();
-                                else {
-                                    Toast.makeText(TelaAmbiente2.this, "Estado movido",
-                                            Toast.LENGTH_LONG).show();
-                                    quadrado_selecionado_grade = null;
-                                    estado_selecionado = null;
-                                    salvarRespostaSecundaria();
-                                }
+                                moverEstadoAux(v);
                             else {
                                 tracarSetaEntreAutomatos((ConstraintLayout) v);
                             }
@@ -309,16 +333,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
             c.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (((ConstraintLayout) v).getChildCount() > 0) {
-                        if (quadrado_selecionado_grade != null) {
-                            quadrado_selecionado_grade.setBackgroundResource(R.drawable.borda_grade);
-                            quadrado_selecionado_grade = null;
-                        }
-                        Intent in = new Intent(TelaAmbiente2.this, ItemTelaAtualizacaoAutomato.class);
-                        startActivity(in);
-                        estado_selecionado = GUI.getGui().getItemTelaDesenhoAutomato().getEstadoAutomato(v.getId());
-                        quadrado_selecionado_grade = (ConstraintLayout) v;
-                    }
+                    atualizarEstado(v);
                     return true;
                 }
             });
@@ -334,149 +349,10 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         tamanhoTelaGrade();
     }
 
-    private void criarGrade2(){
-        final ConstraintLayout.LayoutParams tamanho = new ConstraintLayout.LayoutParams
-                ((int) ConstraintLayout.LayoutParams.WRAP_CONTENT, (int) ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        tamanho.width = GUI.getGui().getItemTelaDesenhoAutomato().getWidth();
-        tamanho.height = GUI.getGui().getItemTelaDesenhoAutomato().getHeiht();
-
-
+    private void criarGradeAux(){
         new Thread() {
             public void run() {
-
-                for (int j = 0; j < numero_grande; j++) {
-                    final int i = j;
-
-                    ConstraintLayout c = new ConstraintLayout(getBaseContext());
-                    c.setLayoutParams(tamanho);
-                    c.setBackgroundResource(R.drawable.borda_grade);
-                    c.setPadding(5, 5, 5, 5);
-                    c.setId(i);
-                    c.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (!bloquearClick) {
-                                bloquearClick = true;
-                                if (((ConstraintLayout) v).getChildCount() == 0) {
-                                    if (estado_selecionado != null) {
-                                        int q1 = (int) v.getId() - 30; // cima
-                                        int q2 = (int) v.getId() + 30; // baixo
-                                        int q3 = (int) v.getId() - 1; // esquerda
-                                        int q4 = (int) v.getId() + 1; // direita
-                                        int q5 = q1 - 1; // diagonal esquerda cima
-                                        int q6 = q1 + 1; // diagonal direita cima
-                                        int q7 = q2 - 1; // diagonal esquerda baixo
-                                        int q8 = q2 + 1; // diagonal direita baixo
-                                        if ((q1 == estado_selecionado.getId() || q1 < 0 || (q1 >= 0 && ((ConstraintLayout) g.findViewById(q1)).getChildCount() == 0)) &&
-                                                (q2 == estado_selecionado.getId() || q2 < 0 || (q2 >= 0 && ((ConstraintLayout) g.findViewById(q2)).getChildCount() == 0)) &&
-                                                (q3 == estado_selecionado.getId() || q3 < 0 || (q3 >= 0 && ((ConstraintLayout) g.findViewById(q3)).getChildCount() == 0)) &&
-                                                (q4 == estado_selecionado.getId() || q4 < 0 || (q4 >= 0 && ((ConstraintLayout) g.findViewById(q4)).getChildCount() == 0)) &&
-                                                (q5 == estado_selecionado.getId() || q5 < 0 || (q5 >= 0 && ((ConstraintLayout) g.findViewById(q5)).getChildCount() == 0)) &&
-                                                (q6 == estado_selecionado.getId() || q6 < 0 || (q6 >= 0 && ((ConstraintLayout) g.findViewById(q6)).getChildCount() == 0)) &&
-                                                (q7 == estado_selecionado.getId() || q7 < 0 || (q7 >= 0 && ((ConstraintLayout) g.findViewById(q7)).getChildCount() == 0)) &&
-                                                (q8 == estado_selecionado.getId() || q8 < 0 || (q8 >= 0 && ((ConstraintLayout) g.findViewById(q8)).getChildCount() == 0))) {
-                                            quadrado_selecionado_grade.removeAllViews();
-                                            ConstraintLayout c = (ConstraintLayout) v;
-                                            montarAutomato(c, estado_selecionado);
-                                            Estado estado = GUI.getGui().getItemTelaDesenhoAutomato().getEstadoAutomato(estado_selecionado.getId());
-                                            estado.setId(v.getId());
-
-                                            estado.atualizarCordenadasMinhaSeta(c.getX(), c.getY());
-                                            estado.setCordenadas(new float[]{c.getX(), c.getY()});
-                                            ArrayList<Estado> automatos = GUI.getGui().getItemTelaDesenhoAutomato().getListaEstadosAutomato();
-                                            for (int i = 0; i < automatos.size(); i++) {
-                                                estado = automatos.get(i);
-                                                estado.atualizarSeta(quadrado_selecionado_grade.getX(), quadrado_selecionado_grade.getY(), c.getX(), c.getY());
-                                            }
-                                            DesenharSeta view = findViewById(R.id.view_setas);
-                                            view.redesenharSetas();
-
-                                            estado_selecionado = null;
-                                            quadrado_selecionado_grade = null;
-                                            salvarRespostaSecundaria();
-                                            Toast.makeText(TelaAmbiente2.this, "Estado movido",
-                                                    Toast.LENGTH_LONG).show();
-                                        } else {
-                                            Toast.makeText(TelaAmbiente2.this, "Deixe pelo menos um quadrado de distância entre os estados",
-                                                    Toast.LENGTH_LONG).show();
-                                        }
-                                    } else {
-                                        int q1 = (int) v.getId() - 30; // cima
-                                        int q2 = (int) v.getId() + 30; // baixo
-                                        int q3 = (int) v.getId() - 1; // esquerda
-                                        int q4 = (int) v.getId() + 1; // direita
-                                        int q5 = q1 - 1; // diagonal esquerda cima
-                                        int q6 = q1 + 1; // diagonal direita cima
-                                        int q7 = q2 - 1; // diagonal esquerda baixo
-                                        int q8 = q2 + 1; // diagonal direita baixo
-                                        if ((q1 < 0 || (q1 >= 0 && ((ConstraintLayout) g.findViewById(q1)).getChildCount() == 0)) &&
-                                                (q2 < 0 || (q2 >= 0 && ((ConstraintLayout) g.findViewById(q2)).getChildCount() == 0)) &&
-                                                (q3 < 0 || (q3 >= 0 && ((ConstraintLayout) g.findViewById(q3)).getChildCount() == 0)) &&
-                                                (q4 < 0 || (q4 >= 0 && ((ConstraintLayout) g.findViewById(q4)).getChildCount() == 0)) &&
-                                                (q5 < 0 || (q5 >= 0 && ((ConstraintLayout) g.findViewById(q5)).getChildCount() == 0)) &&
-                                                (q6 < 0 || (q6 >= 0 && ((ConstraintLayout) g.findViewById(q6)).getChildCount() == 0)) &&
-                                                (q7 < 0 || (q7 >= 0 && ((ConstraintLayout) g.findViewById(q7)).getChildCount() == 0)) &&
-                                                (q8 < 0 || (q8 >= 0 && ((ConstraintLayout) g.findViewById(q8)).getChildCount() == 0))) {
-                                            if (quadrado_selecionado_grade != null) {
-                                                quadrado_selecionado_grade.setBackgroundResource(R.drawable.borda_grade);
-                                                quadrado_selecionado_grade = null;
-                                            }
-                                            Intent in = new Intent(TelaAmbiente2.this, ItemTelaCriacaoAutomato.class);
-                                            startActivity(in);
-                                            quadrado_selecionado_grade = (ConstraintLayout) v;
-                                        } else {
-                                            Toast.makeText(TelaAmbiente2.this, "Deixe pelo menos um quadrado de distância entre os estados",
-                                                    Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                } else {
-                                    if (estado_selecionado != null)
-                                        if (estado_selecionado.getId() != v.getId())
-                                            Toast.makeText(TelaAmbiente2.this, "Já existe um estado nessa posição!",
-                                                    Toast.LENGTH_LONG).show();
-                                        else {
-                                            Toast.makeText(TelaAmbiente2.this, "Estado movido",
-                                                    Toast.LENGTH_LONG).show();
-                                            quadrado_selecionado_grade = null;
-                                            estado_selecionado = null;
-                                            salvarRespostaSecundaria();
-                                        }
-                                    else {
-                                        tracarSetaEntreAutomatos((ConstraintLayout) v);
-                                    }
-                                }
-                                bloquearClick = false;
-                            }
-                            return;
-                        }
-                    });
-                    c.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View v) {
-                            if (((ConstraintLayout) v).getChildCount() > 0) {
-                                if (quadrado_selecionado_grade != null) {
-                                    quadrado_selecionado_grade.setBackgroundResource(R.drawable.borda_grade);
-                                    quadrado_selecionado_grade = null;
-                                }
-                                Intent in = new Intent(TelaAmbiente2.this, ItemTelaAtualizacaoAutomato.class);
-                                startActivity(in);
-                                estado_selecionado = GUI.getGui().getItemTelaDesenhoAutomato().getEstadoAutomato(v.getId());
-                                quadrado_selecionado_grade = (ConstraintLayout) v;
-                            }
-                            return true;
-                        }
-                    });
-                    Estado estado;
-                    if ((estado = GUI.getGui().getItemTelaDesenhoAutomato().getEstadoAutomato(c.getId())) != null) {
-                        montarAutomato(c, estado);
-                    }
-
-                    adicionarElementoGrade(c);
-                }
-
-                adicionarElementoCanvas();
-
-                tamanhoTelaGrade();
+                criarGrade();
             }
         }.start();
     }
@@ -537,7 +413,6 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
                 startActivity(in);
             }
             quadrado_selecionado_grade.setBackgroundResource(R.drawable.borda_grade);
-            //quadrado_selecionado_grade.setBackgroundResource(0);
         }
     }
 
