@@ -66,7 +66,6 @@ public class DesenharSeta extends View
                             transicao.getCordenadas_seta()[3], transicao, estados.get(i));
                 }
                 else{
-                    //GUI.getGui().getTelaAmbiente2().desenharSimbolosSeta(Integer.parseInt(automatos.get(i).getId() + "" + seta.getAutomato().getId()), seta, new int[]{0,0,255});
                     GUI.getGui().getTelaAmbiente2().desenharSetaMesmoAutomato(estados.get(i), transicao);
                 }
             }
