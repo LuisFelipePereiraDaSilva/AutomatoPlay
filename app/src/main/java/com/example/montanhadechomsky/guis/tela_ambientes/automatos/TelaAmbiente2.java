@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,16 +26,12 @@ import com.example.montanhadechomsky.controles.ambientes.automatos.Transicao;
 import com.example.montanhadechomsky.controles.ambientes.automatos.Estado;
 import com.example.montanhadechomsky.fachadas.Controler;
 import com.example.montanhadechomsky.fachadas.GUI;
-import com.example.montanhadechomsky.guis.tela_detalhes.TelaDetalhes;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.DesenharSeta;
-import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.ItemTelaAjuda;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.ItemTelaAtualizacaoAutomato;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.ItemTelaAtualizacaoSeta;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.ItemTelaCriacaoAutomato;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.ItemTelaCriacaoSeta;
-import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.ItemTelaExemplos;
-import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.ItemTelaInstrucao;
-import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.ItemTelaProblema;
+import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.PopUpCustomizado;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.ItemTelaRespostaAutomato;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.ItemTelaTabela;
 
@@ -44,7 +42,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnItemSelectedListener, PopupMenu.OnMenuItemClickListener {
 
     private int numero_grande = 600;
 
@@ -70,12 +68,17 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void salvarRespostaSecundaria(){
-        if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
+        if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null) {
+            Controler.getControler().getQuestaoSelecionadaAmbiente2().setPorcentagem(GUI.
+                    getGui().getItemTelaDesenhoAutomato().getPorcetagem());
             Controler.getControler().getQuestaoSelecionadaAmbiente2().setResposta_secundaria(GUI.
                     getGui().getItemTelaDesenhoAutomato().getListaEstadosAutomato());
-        else
+        } else {
+            Controler.getControler().getQuestaoSelecionadaAmbiente3().setPorcentagem(GUI.
+                    getGui().getItemTelaDesenhoAutomato().getPorcetagem());
             Controler.getControler().getQuestaoSelecionadaAmbiente3().setResposta_secundaria(GUI.
                     getGui().getItemTelaDesenhoAutomato().getListaEstadosAutomato());
+        }
     }
 
     @Override
@@ -88,16 +91,9 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         tela_grade_simbolos = findViewById(R.id.tela_grade_simbolos);
         view = findViewById(R.id.view_setas);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
-            toolbar.setTitle("Problema " + Controler.getControler().getQuestaoSelecionadaAmbiente2().getNumero() + " - AFD");
-        else
-            toolbar.setTitle("Problema " + Controler.getControler().getQuestaoSelecionadaAmbiente3().getNumero() + " - AFND");
-        setSupportActionBar(toolbar);
-
         GUI.getGui().setTelaAmbiente2(this);
 
-        preencherInformacoes();
+        //preencherInformacoes();
         prencherNumerosZoom();
 
         if(GUI.getGui().getMainActivity().getAbrirTelaPrimeiraVez()) {
@@ -106,30 +102,8 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         }
         else
             criarGrade();
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_detalhes) {
-            Intent in = new Intent(TelaAmbiente2.this, TelaDetalhes.class);
-            startActivity(in);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        verificarExisteEstados();
     }
 
     private void prencherNumerosZoom(){
@@ -138,7 +112,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         a.add("10%"); a.add("20%");a.add("30%");a.add("40%");a.add("50%"); a.add("60%");a.add("70%"); a.add("80%");
         a.add("90%");a.add("100%");
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, a);
+                R.layout.desing_spinner_zoom, a);
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         numeros.setAdapter(spinnerAdapter);
@@ -146,13 +120,17 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         numeros.setOnItemSelectedListener(this);
     }
 
-    private void preencherInformacoes(){
-        if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
-            textViewProblema(Controler.getControler().getQuestaoSelecionadaAmbiente2().getProblema());
-        else
-            textViewProblema(Controler.getControler().getQuestaoSelecionadaAmbiente3().getProblema());
+    private void isTextoAuxiliarAutomato(boolean b) {
+        TextView t = findViewById(R.id.id_texto_auxiliar_automato);
+        t.setVisibility(b ? View.VISIBLE : View.INVISIBLE);
+    }
 
-        textViewInstrucao(Controler.getControler().getInstrucoesAmbiente2E3());
+    private void verificarExisteEstados() {
+        if (GUI.getGui().getItemTelaDesenhoAutomato().getListaEstadosAutomato().size() == 0) {
+            isTextoAuxiliarAutomato(true);
+        } else {
+            isTextoAuxiliarAutomato(false);
+        }
     }
 
     public void mensagemExibir(String titulo, String mensagem){
@@ -161,36 +139,6 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         mens.setMessage(mensagem);
         mens.setNeutralButton("Ok", null);
         mens.show();
-    }
-
-    public void textViewProblema(String problema){
-        TextView t = findViewById(R.id.id_problema);
-
-        GUI.getGui().getItensMetodosAuxiliares().montagemTextView(problema, "Problema: ", t, this);
-
-        t.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent in = new Intent(TelaAmbiente2.this, ItemTelaProblema.class);
-                startActivity(in);
-                return true;
-            }
-        });
-    }
-
-    public void textViewInstrucao(String instrucao){
-        TextView t = findViewById(R.id.id_instrucao);
-
-        GUI.getGui().getItensMetodosAuxiliares().montagemTextView(instrucao, "Instruções: ", t, this);
-
-        t.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent in = new Intent(TelaAmbiente2.this, ItemTelaInstrucao.class);
-                startActivity(in);
-                return true;
-            }
-        });
     }
 
     private void criarEstado(View v) {
@@ -218,7 +166,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
             startActivity(in);
             quadrado_selecionado_grade = (ConstraintLayout) v;
         } else {
-            Toast.makeText(TelaAmbiente2.this, "Deixe pelo menos um quadrado de distância entre os estados",
+            Toast.makeText(TelaAmbiente2.this, "Por favor, deixe um espaço maior entre os estados",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -262,7 +210,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
             Toast.makeText(TelaAmbiente2.this, "Estado movido",
                     Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(TelaAmbiente2.this, "Deixe pelo menos um quadrado de distância entre os estados",
+            Toast.makeText(TelaAmbiente2.this, "Por favor, deixe um espaço maior entre os estados",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -304,7 +252,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
 
             ConstraintLayout c = new ConstraintLayout(getBaseContext());
             c.setLayoutParams(tamanho);
-            c.setBackgroundResource(R.drawable.borda_grade);
+            //c.setBackgroundResource(R.drawable.borda_grade2);
             c.setPadding(5, 5, 5, 5);
             c.setId(i);
             c.setOnClickListener(new View.OnClickListener() {
@@ -347,6 +295,12 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
 
         adicionarElementoCanvas();
         tamanhoTelaGrade();
+
+        handler.post(new Runnable(){
+            public void run(){
+                g.setBackgroundResource(R.drawable.borda_grade2);
+            }
+        });
     }
 
     private void criarGradeAux(){
@@ -629,11 +583,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
             super.onBackPressed();
             if(!bloquearClick) {
                 bloquearClick = true;
-                if (GUI.getGui().getItemTelaDesenhoAutomato().getPorcetagem() != 60) {
-                    tamanho_antigo = GUI.getGui().getItemTelaDesenhoAutomato().getWidth();
-                    GUI.getGui().getItemTelaDesenhoAutomato().setPorcetagem(60);
-                    auxClickZoom();
-                }
+
                 if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
                     GUI.getGui().getMainActivity().atualizarQuestaoAmbiente2();
                 else
@@ -652,6 +602,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         quadrado_selecionado_grade = null;
         GUI.getGui().getItemTelaDesenhoAutomato().adicionarEstadoAutomato(estado);
         salvarRespostaSecundaria();
+        verificarExisteEstados();
     }
 
     public void atualizarEstadoAutomato(Estado automato, boolean mover){
@@ -682,6 +633,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         quadrado_selecionado_grade = null;
         estado_selecionado = null;
         salvarRespostaSecundaria();
+        verificarExisteEstados();
     }
 
     public void limparGradeAutomato(){
@@ -799,22 +751,57 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-    public void clickProblema(View view){
-        Intent in = new Intent(TelaAmbiente2.this, ItemTelaProblema.class);
+    private boolean expandirMenu = false;
+    public void clickBotaoExpandirOuDiminuirMenu(View view) {
+        info.androidhive.fontawesome.FontTextView botaoMenu = findViewById(R.id.botaoMenu);
+        final LinearLayout.LayoutParams tamanho = new LinearLayout.LayoutParams
+                ((int) ConstraintLayout.LayoutParams.WRAP_CONTENT, (int) ConstraintLayout.LayoutParams.WRAP_CONTENT);
+        HorizontalScrollView menu = findViewById(R.id.menu);
+
+        if (expandirMenu) {
+            expandirMenu = false;
+            botaoMenu.setText(R.string.fa_chevron_right_solid);
+
+            tamanho.width = 0;
+            menu.setLayoutParams(tamanho);
+        } else {
+            expandirMenu = true;
+            botaoMenu.setText(R.string.fa_chevron_left_solid);
+
+            tamanho.width = ConstraintLayout.LayoutParams.MATCH_PARENT;
+            menu.setLayoutParams(tamanho);
+        }
+    }
+
+    public void clickProblema(){
+        String texto = "";
+        if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null) {
+            texto = ("&Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente2().getProblema());
+        }
+        else if(Controler.getControler().getQuestaoSelecionadaAmbiente3() != null){
+            texto = ("&Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente3().getProblema());
+        }
+
+        PopUpCustomizado pop = new PopUpCustomizado("Problema", texto);
+        Intent in = new Intent(TelaAmbiente2.this, pop.getClass());
         startActivity(in);
     }
 
-    public void clickInstrucoes(View view){
-        Intent in = new Intent(TelaAmbiente2.this, ItemTelaInstrucao.class);
+    public void clickInstrucoes(){
+        PopUpCustomizado pop = new PopUpCustomizado("Instruções",
+                "&Instruções:& " + Controler.getControler().getInstrucoesAmbiente2E3());
+        Intent in = new Intent(TelaAmbiente2.this, pop.getClass());
         startActivity(in);
     }
 
-    public void clickAjuda(View view){
-        Intent in = new Intent(TelaAmbiente2.this, ItemTelaAjuda.class);
+    public void clickAjuda(){
+        PopUpCustomizado pop = new PopUpCustomizado("Instruções",
+                Controler.getControler().getAjudaAmbiente2E3());
+        Intent in = new Intent(TelaAmbiente2.this, pop.getClass());
         startActivity(in);
     }
 
-    public void clickResposta(View view){
+    public void clickResposta(){
         if( (Controler.getControler().getQuestaoSelecionadaAmbiente2() != null &&
                 Controler.getControler().getQuestaoSelecionadaAmbiente2().getStatus_resposta() == ProblemaAmbientes.StatusResposta.Correta) ||
                 (Controler.getControler().getQuestaoSelecionadaAmbiente3() != null &&
@@ -844,25 +831,21 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-    public void clickReiniciar(View view){
+    public void clickBotaoLimpar(View view){
         GUI.getGui().getItemTelaDesenhoAutomato().getListaEstadosAutomato().clear();
         g.removeAllViews();
         tela_grade.removeAllViews();
         criarGrade();
         salvarRespostaSecundaria();
+        verificarExisteEstados();
     }
 
-    public void clickTabela(View view){
+    public void clickTabela(){
         Intent in = new Intent(TelaAmbiente2.this, ItemTelaTabela.class);
         startActivity(in);
     }
 
-    public void clickExemplos(View view){
-        Intent in = new Intent(TelaAmbiente2.this, ItemTelaExemplos.class);
-        startActivity(in);
-    }
-
-    public void clickSubmeter(View view){
+    public void clickBotaoEnviar(View view){
         if( (Controler.getControler().getQuestaoSelecionadaAmbiente2() != null &&
                 Controler.getControler().getQuestaoSelecionadaAmbiente2().getResposta_secundaria().size() > 0) ||
                 (Controler.getControler().getQuestaoSelecionadaAmbiente3() != null &&
@@ -914,6 +897,42 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
             mensagemExibir("Resultado", "Resposta não pode ser vazia!");
     }
 
+    public void clickBotaoVoltar(View view) {
+        super.onBackPressed();
+        if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
+            GUI.getGui().getMainActivity().atualizarQuestaoAmbiente2();
+        else
+            GUI.getGui().getMainActivity().atualizarQuestaoAmbiente3();
+        finish();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.item_menu_problema) {
+            clickProblema();
+        } else if (id == R.id.item_menu_instrucoes) {
+            clickInstrucoes();
+        } else if (id == R.id.item_menu_ajuda) {
+            clickAjuda();
+        } else if (id == R.id.item_menu_resposta) {
+            clickResposta();
+        } else if (id == R.id.item_menu_tabela) {
+            clickTabela();
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+
+        return true;
+    }
+    public void clickBotaoMaisOpcoes(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate((R.menu.menu_ambiente2));
+        popup.show();
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         try {
@@ -923,9 +942,11 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
                 numeros.setSelection(position);
                 tamanho_antigo = GUI.getGui().getItemTelaDesenhoAutomato().getWidth();
                 GUI.getGui().getItemTelaDesenhoAutomato().setPorcetagem((position + 1) * 10);
+                GUI.getGui().getItemTelaDesenhoAutomato().setPorcetagem((position + 1) * 10);
                 Toast.makeText(this, "Zoom em " + GUI.getGui().getItemTelaDesenhoAutomato().getPorcetagem(), Toast.LENGTH_SHORT).show();
                 auxClickZoom();
                 numeros.setActivated(true);
+                salvarRespostaSecundaria();
             }
             liberar_spinner = true;
         }catch (Exception e){}
@@ -985,4 +1006,5 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         }
         c.setLayoutParams(tamanho);
     }
+
 }

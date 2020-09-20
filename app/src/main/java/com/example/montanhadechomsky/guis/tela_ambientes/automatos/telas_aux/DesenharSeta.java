@@ -93,12 +93,17 @@ public class DesenharSeta extends View
 
     private void montarSeta(Canvas canvas, float startX, float startY, float mX, float mY, Transicao transicao, Estado estado) {
 
+        // startX e startY é as coordenadas do estado de saída, eles apontam para a diagonal superior esquerdo do quadrado que o estado está
+        // mX e mY é as coordenadas do estado de chegada, eles apontam para a diagonal superior esquerdo do quadrado que o estado está
+
+        // calcula o angulo da seta
         double angle = calculateAngle(startX, startY, mX, mY);
 
         float final_angle = (float) (180 - angle);
 
         Path arrow_path = new Path();
 
+        // Soma cada uma das coordenadas com a metade do tamanho do quadrado que o estado está inserido, assim as coordenadas apontam para o meio do quadrado
         startX = (startX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth()/2);
         startY = (startY + GUI.getGui().getItemTelaDesenhoAutomato().getHeiht()/2);
         mX = (mX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth()/2);
@@ -109,80 +114,123 @@ public class DesenharSeta extends View
         ArrayList<float[]> pontos = new ArrayList<>();
         pontos.add(new float[]{startX, startY});
 
+        // começa a traçar uma linha pontilhada saindo de um estado para outro (linha da seta)
+
         for (int i = 0; true; i++) {
 
-
+            // verifica se os dois estados estão no mesmo plano cartesiano X, se sim, ele vai traçar a linha verticalmente
             if(startX == mX) {
                 float y = 0;
+                // verifica se o estado de chegada está abaixo do estado de saida
                 if(mY > startY)
                     y = startY + i;
-                else
+                else // o estado de chegada está acima do estado de saida
                     y = startY - i;
                 pontos.add(new float[]{startX, y});
-                if(y == Math.round(mY))
+                if(y == Math.round(mY)) // verifica se a linha verticalmente já chegou no estado de chegada
                     break;
             }
+            // verifica se os dois estados estão no mesmo plano cartesiano de Y, se sim, ele vai traçar a linha horizontalmente
             else if(startY == mY) {
                 float x = 0;
+                // verifica se o estado de chegada está a direita do estado de saida
                 if(mX > startX)
                     x = startX + i;
-                else
+                else // o estado de chegada está a esquerda do estado de saida
                     x = startX - i;
                 pontos.add(new float[]{x, startY});
-                if(x == Math.round(mX))
+                if(x == Math.round(mX)) // verifica se a linha horizontalmente já chegou no estado de chegada
                     break;
             }
-            else {
-                if(mX > startX) {
+            else { // a linha é inclinada
+                if(mX > startX) { // verifica se o estado de chegada está a direita do estádo de saida
                     float d = (mY - startY)/(mX - startX);
                     cont1++;
                     cont2 += d;
                 }
-                else{
-                    if(mY > startY) {
+                else{ // o estado de chegada está a esquerda do estado de saida
+                    if(mY > startY) { // o estado de chegada está abaixo do estado de saida
                         float d = (mY - startY) / (startX - mX);
                         cont1--;
                         cont2 += d;
                     }
-                    else{
+                    else{ // o estado de chegada está acima do estádo de saida
                         float d = (startY - mY)/(startX - mX);
                         cont1--;
                         cont2 -= d;
                     }
                 }
                 pontos.add(new float[]{startX + cont1, startY + cont2});
-                if (startY + cont2 == mY || startX + cont1 == mX)
+                if (startY + cont2 == mY || startX + cont1 == mX) // verifica se a linha chegou no está de chegada
                     break;
             }
         }
 
+        // Até aqui o que aconteceu? foi traçado uma linha que leva do meio do estado de saída até o meio do estado de chegada.
+        /*
+        * Um dos erros está justamente na próxima parte, que é o que deixa a seta um pouco afastada dos automatos.
+        * Isso acontece porque eu tenho pegar um ponto x e y mantendo a direção da seta exatamente na borda do estado.
+        * Se a seta for horizontal ou vertical funciona normal, porque procuro o ponto x e y exatamente subtraindo a metada do quadrado que o
+        * estado está inserido, "que no caso seria o raio do circulo". Porém quando a seta está inclinida e eu pego o ponto subtraindo a
+        * metade do quadrado, ele pega o ponto na diagonal do quadrado, logo a medade do quadrado não é o raio. Isso da a impressão que a
+        * seta não chegou no estado, mas chegou, porém ficou na diagonal do quadrado.
+        *
+        * Então fica a questão, como resolver esse problema? Ele é resolvido pegando o raio do circulo, então como saber o raio de um
+        * circulo dentro de um quadrado?
+        * */
+
+        // Este é o código que eu pego o ponto x e y subtraindo a metade do quadrado
         int meio = 11;
         for(int i = 0; i < pontos.size(); i++){
-            float x = pontos.get(i)[0];
-            float x2 = startX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth()/2;
-            float x3 = startX - GUI.getGui().getItemTelaDesenhoAutomato().getWidth()/2;
-            float y = pontos.get(i)[1];
-            float y2 = startY + GUI.getGui().getItemTelaDesenhoAutomato().getWidth()/2;
-            float y3 = startY - GUI.getGui().getItemTelaDesenhoAutomato().getWidth()/2;
+            if (startX == mX || startY == mY) { // se a linha for horintal ou vertical
+                float x = pontos.get(i)[0];
+                float x2 = startX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+                float x3 = startX - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+                float y = pontos.get(i)[1];
+                float y2 = startY + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+                float y3 = startY - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
 
-            if((x == x2 || x == x3 || ((int) x == x2) || ((int) x == x3) || ((int) x == (int) x2) || ((int) x == (int) x3) || ((int) x - 1 == (int) x2) || ((int) x + 1 == (int) x2) || ((int) x - 1 == (int) x3) || ((int) x + 1 == (int) x3)) ||
-                    (y == y2 || y == y3 || ((int) y == x2) || ((int) y == y3) || ((int) y == (int) y2) || ((int) y == (int) y3) || ((int) y - 1 == (int) y2) || ((int) y + 1 == (int) y2) || ((int) y - 1 == (int) y3) || ((int) y + 1 == (int) y3))){
-                meio = i;
-                break;
+                if ((x == x2 || x == x3 || ((int) x == x2) || ((int) x == x3) || ((int) x == (int) x2) || ((int) x == (int) x3) || ((int) x - 1 == (int) x2) || ((int) x + 1 == (int) x2) || ((int) x - 1 == (int) x3) || ((int) x + 1 == (int) x3)) ||
+                        (y == y2 || y == y3 || ((int) y == x2) || ((int) y == y3) || ((int) y == (int) y2) || ((int) y == (int) y3) || ((int) y - 1 == (int) y2) || ((int) y + 1 == (int) y2) || ((int) y - 1 == (int) y3) || ((int) y + 1 == (int) y3))) {
+                    meio = i;
+                    break;
+                }
+            } else { // linha inclinada
+                float x = pontos.get(i)[0];
+                float x2 = startX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+                float x3 = startX - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+                float y = pontos.get(i)[1];
+                float y2 = startY + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+                float y3 = startY - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+
+                if (( ((int) x - 15 == (int) x2) || ((int) x + 15 == (int) x2) || ((int) x - 15 == (int) x3) || ((int) x + 15 == (int) x3)) ||
+                        ( ((int) y - 15 == (int) y2) || ((int) y + 15 == (int) y2) || ((int) y - 15 == (int) y3) || ((int) y + 15 == (int) y3))) {
+                    meio = i;
+                    break;
+                }
             }
         }
+        // -------------------------------------------------------------------------
 
         startX = pontos.get(meio)[0];
         startY = pontos.get(meio)[1];
         mX = pontos.get(pontos.size() - 1 - meio)[0];
         mY = pontos.get(pontos.size() - 1 - meio)[1];
 
+        ArrayList<float[]> pontosAux = new ArrayList<>();
+        for(int i = meio; i < (pontos.size() - meio); i++) {
+            pontosAux.add(pontos.get(i));
+        }
+
+        float aa = pontosAux.get((int)pontosAux.size()/2)[1];
+        float bb = pontos.get((int)pontos.size()/2)[1];
+
         int resultado = verificarSetaDupla(transicao);
         int[] cor;
         if(resultado == 0) {
             cor =  new int[]{0,0,0};
             canvas.drawLine(startX, startY, mX, mY, initPaint(cor));
-            transicao.setCordenadas_simbolos(new float[]{pontos.get((int)pontos.size()/2)[0], pontos.get((int)pontos.size()/2)[1]});
+            transicao.setCordenadas_simbolos(new float[]{pontosAux.get((int)pontosAux.size()/2)[0], pontosAux.get((int)pontosAux.size()/2)[1]});
         }else{
             Paint paint  = new Paint();
             paint.setAntiAlias(true);

@@ -14,9 +14,9 @@ public class ItemTelaRespostaCorreta extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.itens_ambientes_problema);
+        setContentView(R.layout.pop_up_customizado);
 
-        TextView t = findViewById(R.id.id_problema);
+        TextView t = findViewById(R.id.texto_pop_up);
 
         t.setText(Controler.getControler().getQuestaoSelecionadaAmbiente1().getResposta_submetida());
 

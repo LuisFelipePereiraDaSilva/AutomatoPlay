@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".guis.tela_ambientes.ambiente1.TelaAmbiente1"
     tools:showIn="@layout/activity_ambiente1">
@@ -23,7 +24,7 @@
         >
 
         <include
-            layout="@layout/itens_ambientes_problema"
+            layout="@layout/itens_ambiente1_problema"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="0dp"
@@ -47,7 +48,7 @@
         >
 
         <include
-            layout="@layout/itens_ambientes_instrucao"
+            layout="@layout/itens_ambiente1_instrucao"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="0dp"

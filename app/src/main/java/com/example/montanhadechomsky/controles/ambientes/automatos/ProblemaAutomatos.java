@@ -48,4 +48,12 @@ public class ProblemaAutomatos extends ProblemaAmbientes implements Serializable
     public void setResposta_secundaria(ArrayList<Estado> resposta_secundaria) {
         this.resposta_secundaria = resposta_secundaria;
     }
+
+    public int getPorcentagem() {
+        return super.getPorcentagem();
+    }
+
+    public void setPorcentagem(int porcentagem) {
+        super.setPorcentagem(porcentagem);
+    }
 }

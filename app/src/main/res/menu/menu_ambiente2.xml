@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.montanhadechomsky.MainActivity">
+    <item
+        android:id="@+id/item_menu_problema"
+        android:orderInCategory="100"
+        android:title="Problema"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_menu_instrucoes"
+        android:orderInCategory="100"
+        android:title="Instruções"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_menu_ajuda"
+        android:orderInCategory="100"
+        android:title="Ajuda"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_menu_resposta"
+        android:orderInCategory="100"
+        android:title="Resposta"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_menu_tabela"
+        android:orderInCategory="100"
+        android:title="Tabela"
+        app:showAsAction="never" />
+</menu>

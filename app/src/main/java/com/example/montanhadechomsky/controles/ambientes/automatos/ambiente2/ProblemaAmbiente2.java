@@ -28,6 +28,7 @@ public class ProblemaAmbiente2 extends ProblemaAutomatos implements Serializable
 
     public void setThis(ProblemaAmbiente2 problema){
         this.automato = problema.automato;
+        this.setPorcentagem(problema.getPorcentagem());
         this.setThis(problema.getNumero(), problema.getStatus_resposta(), problema.getResposta_submetida(), problema.getResposta_secundaria());
     }
 

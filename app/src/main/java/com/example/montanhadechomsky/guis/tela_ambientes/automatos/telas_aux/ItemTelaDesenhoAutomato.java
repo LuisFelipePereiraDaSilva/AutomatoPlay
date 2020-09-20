@@ -1,5 +1,7 @@
 package com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux;
 
+import android.view.View;
+
 import com.example.montanhadechomsky.controles.ambientes.automatos.Estado;
 
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public class ItemTelaDesenhoAutomato extends AppCompatActivity {
     public void setListaEstadosAutomato(ArrayList<Estado> lista) {
         this.automato = lista;
     }
+
+    public ItemTelaDesenhoAutomato(){ }
 
     public ItemTelaDesenhoAutomato(int porcetagem){
         setPorcetagem(porcetagem);
