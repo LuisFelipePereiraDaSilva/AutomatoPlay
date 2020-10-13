@@ -33,7 +33,7 @@ public class GUI {
     private ItemTelaDesenhoAutomato itemTelaDesenhoAutomato;
     public ItemTelaDesenhoAutomato getItemTelaDesenhoAutomato(){
         if(itemTelaDesenhoAutomato == null)
-            itemTelaDesenhoAutomato = new ItemTelaDesenhoAutomato(60);
+            itemTelaDesenhoAutomato = new ItemTelaDesenhoAutomato();
         return itemTelaDesenhoAutomato;
     }
     public void setItemTelaDesenhoAutomato(ItemTelaDesenhoAutomato itemTelaDesenhoAutomato) {

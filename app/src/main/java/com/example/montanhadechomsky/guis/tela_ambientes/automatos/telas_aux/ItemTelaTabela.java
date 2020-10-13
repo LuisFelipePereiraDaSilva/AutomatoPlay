@@ -56,6 +56,8 @@ public class ItemTelaTabela extends Activity {
             grid.addView(c);
         }
 
+        montarElementoTituloTabela("", 0);
+
         for(int i = 1, j = 0 ; i < alfabeto.length + 1; i++, j++){
             montarElementoTituloTabela(alfabeto[j], i);
         }
@@ -101,7 +103,7 @@ public class ItemTelaTabela extends Activity {
         ConstraintLayout c = grid.findViewById(i);
         ScrollView scroll = new ScrollView(getBaseContext());
         TextView text = new TextView(getBaseContext());
-        text.setTextColor(new Color().rgb(255,255,255));
+        text.setTextColor(new Color().rgb(0,0,0));
         text.setTextSize(20);
         text.setText(texto);
         text.setPadding(10,10,10,10);
@@ -135,7 +137,9 @@ public class ItemTelaTabela extends Activity {
         finish();
     }
 
-    public void clickTela(View view){
+    public void clickBotaoClose(View view) {
         finish();
     }
+
+    public void clickMudo(View view) {}
 }

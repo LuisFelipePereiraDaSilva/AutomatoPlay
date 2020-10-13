@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tela_problema"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginVertical="30dp"
+    android:onClick="clickBotaoClose"
+    tools:context=".guis.tela_ambientes.telas_aux.PopUpCustomizado">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginHorizontal="30dp"
+            android:paddingHorizontal="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:background="@drawable/popup_customizado">
+
+                <info.androidhive.fontawesome.FontTextView
+                    android:id="@+id/botao_close_popup"
+                    android:onClick="clickBotaoClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_times_solid"
+                    android:layout_marginTop="-5dp"
+                    android:padding="10dp"
+                    android:textColor="#fff"
+                    android:textSize="25dp"
+                    android:layout_gravity="right"
+                    app:solid_icon="true" />
+
+                <TextView
+                    android:id="@+id/titulo_pop_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text=""
+                    android:padding="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="22dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="-20dp"
+                    />
+
+
+                <LinearLayout
+                    android:id="@+id/map"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/popup_customizado_interno"
+                    >
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+
+                                <TextView
+                                    android:id="@+id/texto_pop_up"
+                                    android:longClickable="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textSize="20dp"
+                                    android:textColor="#000"
+                                    android:padding="10dp"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    />
+
+                        </ScrollView>
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

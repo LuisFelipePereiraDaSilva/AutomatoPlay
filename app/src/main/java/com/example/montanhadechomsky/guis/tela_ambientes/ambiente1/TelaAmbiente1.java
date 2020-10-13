@@ -17,10 +17,7 @@ import com.example.montanhadechomsky.controles.ambientes.ProblemaAmbientes;
 import com.example.montanhadechomsky.fachadas.Controler;
 import com.example.montanhadechomsky.fachadas.GUI;
 import com.example.montanhadechomsky.guis.tela_detalhes.TelaDetalhes;
-import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.ItemTelaAjuda;
-import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.ItemTelaExemplos;
-import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.ItemTelaInstrucao;
-import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.ItemTelaProblema;
+import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.PopUpCustomizado;
 import com.example.montanhadechomsky.guis.tela_ambientes.ambiente1.telas_aux.ItemTelaRespostaCorreta;
 
 import java.util.ArrayList;
@@ -78,7 +75,7 @@ public class TelaAmbiente1 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void textViewProblema(String problema){
+    public void textViewProblema(final String problema){
         TextView t = findViewById(R.id.id_problema);
 
         GUI.getGui().getItensMetodosAuxiliares().montagemTextView(problema, "Problema: ", t, this);
@@ -86,14 +83,16 @@ public class TelaAmbiente1 extends AppCompatActivity {
         t.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent in = new Intent(TelaAmbiente1.this, ItemTelaProblema.class);
+                PopUpCustomizado pop = new PopUpCustomizado("Problema",
+                        "&Problema:& " + problema);
+                Intent in = new Intent(TelaAmbiente1.this, pop.getClass());
                 startActivity(in);
                 return true;
             }
         });
     }
 
-    public void textViewInstrucao(String instrucao){
+    public void textViewInstrucao(final String instrucao){
         TextView t = findViewById(R.id.id_instrucao);
 
         GUI.getGui().getItensMetodosAuxiliares().montagemTextView(instrucao, "Instruções: ", t, this);
@@ -101,7 +100,9 @@ public class TelaAmbiente1 extends AppCompatActivity {
         t.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent in = new Intent(TelaAmbiente1.this, ItemTelaInstrucao.class);
+                PopUpCustomizado pop = new PopUpCustomizado("Instruções",
+                        "&Instruções:& " + instrucao);
+                Intent in = new Intent(TelaAmbiente1.this, pop.getClass());
                 startActivity(in);
                 return true;
             }
@@ -148,7 +149,9 @@ public class TelaAmbiente1 extends AppCompatActivity {
     }
 
     public void clickAjuda(View view){
-        Intent in = new Intent(TelaAmbiente1.this, ItemTelaAjuda.class);
+        PopUpCustomizado pop = new PopUpCustomizado("Ajuda",
+                Controler.getControler().getAjudaAmbiente1());
+        Intent in = new Intent(TelaAmbiente1.this, pop.getClass());
         startActivity(in);
     }
 
@@ -170,11 +173,6 @@ public class TelaAmbiente1 extends AppCompatActivity {
     public void clickReiniciar(View view){
         EditText e = findViewById(R.id.id_resposta_ambiente1);
         e.setText("");
-    }
-
-    public void clickExemplos(View view){
-        Intent in = new Intent(TelaAmbiente1.this, ItemTelaExemplos.class);
-        startActivity(in);
     }
 
     public boolean verificarSimbolosAlfabeto(String string){

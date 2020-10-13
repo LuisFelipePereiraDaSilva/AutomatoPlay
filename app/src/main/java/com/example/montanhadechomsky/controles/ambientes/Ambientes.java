@@ -3,7 +3,7 @@ package com.example.montanhadechomsky.controles.ambientes;
 public class Ambientes {
 
     public String getInstrucoesAmbiente2E3(){
-        return"Para contruir o autômato, você deve utilizar o ambiente de resposta abaixo. Para criar um estado," +
+        return"Para construir o autômato, você deve utilizar o ambiente de resposta abaixo. Para criar um estado," +
                 " basta clicar em um dos retângulos, com isso, irá aparecer as opções do estado (Ex: se é estado" +
                 " de aceitação ou inicial), caso não marque nenhuma opção, por padrão, o estado nem é de aceitação e" +
                 " nem é estado inicial. Caso queira modificar ou deletar algum estado, basta segurar o click em cima" +

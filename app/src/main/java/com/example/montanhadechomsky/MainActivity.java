@@ -308,6 +308,8 @@ public class MainActivity extends AppCompatActivity {
         Controler.getControler().selecionarQuestaoAmbiente3(null);
         GUI.getGui().getItemTelaDesenhoAutomato().setListaEstadosAutomato(Controler.getControler().
                 getQuestaoSelecionadaAmbiente2().getResposta_secundaria());
+        GUI.getGui().getItemTelaDesenhoAutomato().setPorcetagem(Controler.getControler().
+                getQuestaoSelecionadaAmbiente2().getPorcentagem());
         abrir_tela_primeira_vez = true;
         Intent in = new Intent(MainActivity.this, TelaAmbiente2.class);
         startActivity(in);
@@ -406,6 +408,8 @@ public class MainActivity extends AppCompatActivity {
         Controler.getControler().selecionarQuestaoAmbiente3(problema);
         GUI.getGui().getItemTelaDesenhoAutomato().setListaEstadosAutomato(Controler.getControler().
                 getQuestaoSelecionadaAmbiente3().getResposta_secundaria());
+        GUI.getGui().getItemTelaDesenhoAutomato().setPorcetagem(Controler.getControler().
+                getQuestaoSelecionadaAmbiente3().getPorcentagem());
         abrir_tela_primeira_vez = true;
         Intent in = new Intent(MainActivity.this, TelaAmbiente2.class);
         startActivity(in);

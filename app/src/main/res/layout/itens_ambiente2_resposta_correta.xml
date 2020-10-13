@@ -5,83 +5,115 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ccffffff"
+    android:layout_marginVertical="30dp"
+    android:onClick="clickBotaoClose"
+    tools:context=".guis.tela_ambientes.automatos.telas_aux.ItemTelaRespostaAutomato"
     >
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tela_grade"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-            <GridLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/Grid"
-                android:columnCount="30"
-                android:rowCount="20"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-            </GridLayout>
-
-            <com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.DesenharSetaRespostaAutomato
-                android:id="@+id/view_setas"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/tela_grade_aux"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/tela_grade_simbolos"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-
-    </HorizontalScrollView>
-
     <LinearLayout
-        android:orientation="vertical"
-        android:background="#F2ffffff"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintHorizontal_bias="1"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        android:layout_marginHorizontal="30dp"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="clickMudo"
+        android:background="@drawable/popup_customizado">
 
-        <Spinner
-            android:id="@+id/id_numeros_zoom"
-            android:layout_width="60dp"
-            android:background="#40000000"
-            android:layout_height="30dp"
-            android:paddingLeft="10dp"
-            android:gravity="center"
+        <info.androidhive.fontawesome.FontTextView
+            android:id="@+id/botao_close_popup"
+            android:onClick="clickBotaoClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fa_times_solid"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#fff"
+            android:textSize="25dp"
+            android:layout_gravity="right"
+            app:solid_icon="true" />
+
+        <TextView
+            android:id="@+id/titulo_pop_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Resposta"
+            android:padding="5dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="15dp"
+            android:textSize="22dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="-10dp"
             />
+
+        <LinearLayout
+            android:id="@+id/map"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/popup_customizado_interno"
+            >
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/tela_grade"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <GridLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/Grid"
+                            android:columnCount="30"
+                            android:rowCount="20"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                        </GridLayout>
+
+                        <com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.DesenharSetaRespostaAutomato
+                            android:id="@+id/view_setas"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/tela_grade_aux"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/tela_grade_simbolos"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
 
     </LinearLayout>
 

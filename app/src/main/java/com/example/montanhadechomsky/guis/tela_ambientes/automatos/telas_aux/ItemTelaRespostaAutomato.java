@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class ItemTelaRespostaAutomato extends Activity implements AdapterView.OnItemSelectedListener {
+public class ItemTelaRespostaAutomato extends Activity {
 
     private GridLayout g;
     private ConstraintLayout tela_grade;
@@ -56,8 +56,6 @@ public class ItemTelaRespostaAutomato extends Activity implements AdapterView.On
             item.setListaEstadosAutomato(Controler.getControler().getQuestaoSelecionadaAmbiente2().getResposta_submetida());
         else
             item.setListaEstadosAutomato(Controler.getControler().getQuestaoSelecionadaAmbiente3().getResposta_submetida());
-
-        prencherNumerosZoom();
 
         criarGrade();
     }
@@ -125,83 +123,6 @@ public class ItemTelaRespostaAutomato extends Activity implements AdapterView.On
         t.setLayoutParams(tamanho);
         t.setGravity(Gravity.CENTER);
         c.addView(t);
-    }
-
-    private void prencherNumerosZoom(){
-        Spinner numeros = findViewById(R.id.id_numeros_zoom);
-        ArrayList<String> a = new ArrayList<>();
-        a.add("10%"); a.add("20%");a.add("30%");a.add("40%");a.add("50%"); a.add("60%");a.add("70%"); a.add("80%");
-        a.add("90%");a.add("100%");
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, a);
-
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        numeros.setAdapter(spinnerAdapter);
-        numeros.setSelection(a.indexOf(item.getPorcetagem() + "%"));
-        numeros.setOnItemSelectedListener(this);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        try {
-            if(liberar_spinner) {
-                Spinner numeros = findViewById(R.id.id_numeros_zoom);
-                numeros.setActivated(false);
-                numeros.setSelection(position);
-                tamanho_antigo = item.getWidth();
-                item.setPorcetagem((position + 1) * 10);
-                Toast.makeText(this, "Zoom em " + item.getPorcetagem(), Toast.LENGTH_SHORT).show();
-                auxClickZoom();
-                numeros.setActivated(true);
-            }
-            liberar_spinner = true;
-        }catch (Exception e){}
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
-
-    public void auxClickZoom(){
-        tela_grade.removeAllViews();
-        ConstraintLayout.LayoutParams tamanho = new ConstraintLayout.LayoutParams
-                ((int) ConstraintLayout.LayoutParams.WRAP_CONTENT,(int) ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        tamanho.width = item.getWidth();
-        tamanho.height = item.getHeiht();
-
-        LinearLayout.LayoutParams tamanho2 = new LinearLayout.LayoutParams
-                ((int) LinearLayout.LayoutParams.WRAP_CONTENT,(int) LinearLayout.LayoutParams.WRAP_CONTENT);
-        tamanho2.width = item.getWidth();
-        tamanho2.height = item.getHeiht();
-        tamanho2.gravity = Gravity.CENTER;
-
-        for(int i = 0, j = 0; j < item.getListaEstadosAutomato().size() && j < 600; i++){
-            ConstraintLayout c = (ConstraintLayout) g.findViewById(i);
-            if(c.getChildCount() > 0) {
-                TextView t = null;
-                if(i > 0) {
-                    t = c.findViewById(0);
-                    c.removeView(t);
-                    t.setTextSize(item.getTamanhoLetra());
-                }else{
-                    t = new TextView(getBaseContext());
-                    t.setText(item.getEstadoAutomato(0).getNome());
-                    t.setId(0);
-                    t.setTextSize(item.getTamanhoLetra());
-                    t.setTextColor(Color.rgb(0,0,0));
-                    t.setGravity(Gravity.CENTER);
-                    c.removeViewAt(1);
-                }
-                c.addView(t, 1, tamanho2);
-                atualizarSetasZoom(c.getId(), c.getX(), c.getY());
-                j++;
-            }
-            g.removeView(c);
-            g.addView(c, i, tamanho);
-        }
-        view.redesenharSetas();
-        adicionarElementoCanvas();
-        tamanhoTelaGrade();
     }
 
     public void atualizarSetasZoom(int id, float x, float y){
@@ -357,12 +278,15 @@ public class ItemTelaRespostaAutomato extends Activity implements AdapterView.On
     public void onBackPressed() {
         if(!bloquearClick) {
             bloquearClick = true;
-            if (item.getPorcetagem() != 60) {
-                tamanho_antigo = item.getWidth();
-                item.setPorcetagem(60);
-                auxClickZoom();
-            }
             finish();
         }
     }
+
+    public void clickTelaMeio(View view){ }
+
+    public void clickBotaoClose(View view) {
+        finish();
+    }
+
+    public void clickMudo(View view) {}
 }
