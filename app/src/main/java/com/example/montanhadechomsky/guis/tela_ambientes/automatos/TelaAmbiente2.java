@@ -96,9 +96,16 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
         //preencherInformacoes();
         prencherNumerosZoom();
 
-        if(GUI.getGui().getMainActivity().getAbrirTelaPrimeiraVez()) {
+        if( (GUI.getGui().getTelaInicialAmbiente2() != null &&
+                GUI.getGui().getTelaInicialAmbiente2().getAbrirTelaPrimeiraVez())
+        ) {
             criarGradeAux();
-            GUI.getGui().getMainActivity().setarFalsoAbrirTelaPrimeiraVez();
+            GUI.getGui().getTelaInicialAmbiente2().setarFalsoAbrirTelaPrimeiraVez();
+        } else if( (GUI.getGui().getTelaInicialAmbiente3() != null &&
+                GUI.getGui().getTelaInicialAmbiente3().getAbrirTelaPrimeiraVez())
+        ) {
+            criarGradeAux();
+            GUI.getGui().getTelaInicialAmbiente3().setarFalsoAbrirTelaPrimeiraVez();
         }
         else
             criarGrade();
@@ -585,9 +592,9 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
                 bloquearClick = true;
 
                 if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
-                    GUI.getGui().getMainActivity().atualizarQuestaoAmbiente2();
+                    GUI.getGui().getTelaInicialAmbiente2().atualizarQuestaoAmbiente2();
                 else
-                    GUI.getGui().getMainActivity().atualizarQuestaoAmbiente3();
+                    GUI.getGui().getTelaInicialAmbiente3().atualizarQuestaoAmbiente3();
                 finish();
             }
         }
@@ -824,9 +831,9 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
                 auxClickZoom();
             }
             if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
-                GUI.getGui().getMainActivity().atualizarQuestaoAmbiente2();
+                GUI.getGui().getTelaInicialAmbiente2().atualizarQuestaoAmbiente2();
             else
-                GUI.getGui().getMainActivity().atualizarQuestaoAmbiente3();
+                GUI.getGui().getTelaInicialAmbiente3().atualizarQuestaoAmbiente3();
             finish();
         }
     }
@@ -900,9 +907,9 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
     public void clickBotaoVoltar(View view) {
         super.onBackPressed();
         if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
-            GUI.getGui().getMainActivity().atualizarQuestaoAmbiente2();
+            GUI.getGui().getTelaInicialAmbiente2().atualizarQuestaoAmbiente2();
         else
-            GUI.getGui().getMainActivity().atualizarQuestaoAmbiente3();
+            GUI.getGui().getTelaInicialAmbiente3().atualizarQuestaoAmbiente3();
         finish();
     }
 

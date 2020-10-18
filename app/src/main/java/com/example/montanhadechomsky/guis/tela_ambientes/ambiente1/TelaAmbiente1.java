@@ -144,7 +144,7 @@ public class TelaAmbiente1 extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        GUI.getGui().getMainActivity().atualizarQuestaoAmbiente1();
+        GUI.getGui().getTelaInicialAmbiente1().atualizarQuestaoAmbiente1();
         finish();
     }
 
@@ -166,7 +166,7 @@ public class TelaAmbiente1 extends AppCompatActivity {
     }
 
     public void clickAbadonar(View view){
-        GUI.getGui().getMainActivity().atualizarQuestaoAmbiente1();
+        GUI.getGui().getTelaInicialAmbiente1().atualizarQuestaoAmbiente1();
         finish();
     }
 
