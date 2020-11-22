@@ -1,7 +1,6 @@
 package com.example.montanhadechomsky.fachadas;
 
 import com.example.montanhadechomsky.MainActivity;
-import com.example.montanhadechomsky.guis.tela_ambientes.ambiente1.TelaInicialAmbiente1;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.TelaAmbiente2;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.TelaInicialAmbiente2;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.TelaInicialAmbiente3;
@@ -24,14 +23,6 @@ public class GUI {
     }
     public MainActivity getMainActivity(){
         return mainActivity;
-    }
-
-    private TelaInicialAmbiente1 telaInicialAmbiente1;
-    public void setTelaInicialAmbiente1(TelaInicialAmbiente1 m){
-        telaInicialAmbiente1 = m;
-    }
-    public TelaInicialAmbiente1 getTelaInicialAmbiente1(){
-        return telaInicialAmbiente1;
     }
 
     private TelaInicialAmbiente2 telaInicialAmbiente2;

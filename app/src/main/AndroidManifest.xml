@@ -28,20 +28,11 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity android:name=".guis.tela_ambientes.ambiente1.TelaInicialAmbiente1"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
         <activity android:name=".guis.tela_ambientes.automatos.TelaInicialAmbiente2"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity android:name=".guis.tela_ambientes.automatos.TelaInicialAmbiente3"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-        <activity android:name=".guis.tela_ambientes.ambiente1.TelaAmbiente1"
-            android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
@@ -81,10 +72,6 @@
         </activity>
 
         <activity android:name=".guis.tela_ambientes.telas_aux.ItemTelaImagem"
-            android:theme="@style/AppTheme.NoActionBarPopUp">
-        </activity>
-
-        <activity android:name=".guis.tela_ambientes.ambiente1.telas_aux.ItemTelaRespostaCorreta"
             android:theme="@style/AppTheme.NoActionBarPopUp">
         </activity>
 

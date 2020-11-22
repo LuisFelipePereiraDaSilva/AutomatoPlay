@@ -29,7 +29,7 @@ public class PopUpCustomizado extends Activity {
         TextView t = findViewById(R.id.texto_pop_up);
         GUI.getGui().getItensMetodosAuxiliares().montagemTextView(this.texto != null ? this.texto : "Vazio", t, this);
         TextView t2 = findViewById(R.id.titulo_pop_up);
-        t2.setText(this.titulo != null ? this.titulo : "Problemaaaa");
+        t2.setText(this.titulo != null ? this.titulo : "Problema");
     }
 
     public void onStop(){

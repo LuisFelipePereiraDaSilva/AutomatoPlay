@@ -42,35 +42,4 @@ public class Ambientes {
                 "&-> Botão Submeter:& Ao clicar no botão submeter, a resposta será submetida para resolução e retornará o resultado se você" +
                 " acertou ou errou a resposta da questão.";
     }
-
-    public String getInstrucoesAmbiente1(){
-        return "Você deve construir as expressões regulares utilizando os operadores '+' para a operação de união, " +
-                "'*' para o feijo de kleener, para concatenação basta deixar os símbolos colados, além dessas operações, você também pode fazer uso de parêntes '()'. É possível fazer uso de espaços " +
-                "para a organização da ER, estes são desconsiderados na correção.";
-    }
-
-    public String getAjudaAmbiente1(){
-        return "&-> Pergunta:& Você pode visualizar a pergunta no ambiente destinado a ela de forma pequena, como pode também segurar o" +
-                " click em cima da pergunta para abrir ela em tela cheia.\n\n" +
-
-                "&-> Instruções:& Você pode visualizar as instruções no ambiente destinado a ela de forma pequena, como pode também segurar o" +
-                " click em cima das instruções para abrir elas em tela cheia.\n\n" +
-
-                "&-> Links:& Ao click em um link será visualizado uma imagem que foi destino ao mesmo.\n\n" +
-
-                "&-> Botão Ajuda:& Ao clicar no botão ajuda, irá abrir uma tela com instruções de uso do aplicativo.\n\n" +
-
-                "&-> Botão Resposta:& Pode-se visualizar a resposta da questão depois de acerta-lá cliclando no botão resposta.\n\n" +
-
-                "&-> Botão Reiniciar:& Ao clicar no botão reiniciar, a resposta que foi digitada para a questão será apagada.\n\n" +
-
-                "&-> Botão Abadonar:& Ao clicar no botão abadonar, o aplicativo sairá da questão que foi selecionada.\n\n" +
-
-                "&-> Resposta:& Logo após os botões, tem-se o ambiente para colocar a resposta da questão. Nesse ambiente, você irá digitar" +
-                " a expressão regular da questão.\n\n" +
-
-                "&-> Botão Submeter:& Ao clicar no botão submeter, a resposta será submetida para resolução e retornará o resultado se você" +
-                " acertou ou errou a resposta da questão.";
-    }
-
 }

@@ -158,7 +158,6 @@ public class TelaInicialAmbiente2 extends AppCompatActivity {
 
     public void telaAmbiente2(ProblemaAmbiente2 problema) {
         GUI.getGui().setItemTelaDesenhoAutomato(null);
-        Controler.getControler().selecionarQuestaoAmbiente1(null);
         Controler.getControler().selecionarQuestaoAmbiente2(problema);
         Controler.getControler().selecionarQuestaoAmbiente3(null);
         GUI.getGui().getItemTelaDesenhoAutomato().setListaEstadosAutomato(Controler.getControler().

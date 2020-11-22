@@ -111,6 +111,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
             criarGrade();
 
         verificarExisteEstados();
+        clickProblema();
     }
 
     private void prencherNumerosZoom(){

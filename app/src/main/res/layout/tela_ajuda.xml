@@ -56,19 +56,6 @@
             android:layout_marginBottom="10dp"
             />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Expressão Regular"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp"
-            android:textColor="#000"
-            android:background="@drawable/botao_com_sombra2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"
-            />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

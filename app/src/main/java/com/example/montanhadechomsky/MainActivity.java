@@ -1,39 +1,21 @@
 package com.example.montanhadechomsky;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
-import com.example.montanhadechomsky.controles.ambientes.ProblemaAmbientes;
-import com.example.montanhadechomsky.controles.ambientes.ambiente1.ProblemaAmbiente1;
-import com.example.montanhadechomsky.controles.ambientes.automatos.ambiente2.ProblemaAmbiente2;
-import com.example.montanhadechomsky.controles.ambientes.automatos.ambiente3.ProblemaAmbiente3;
 import com.example.montanhadechomsky.fachadas.Controler;
 import com.example.montanhadechomsky.fachadas.GUI;
-import com.example.montanhadechomsky.guis.tela_ambientes.ambiente1.TelaAmbiente1;
-import com.example.montanhadechomsky.guis.tela_ambientes.ambiente1.TelaInicialAmbiente1;
-import com.example.montanhadechomsky.guis.tela_ambientes.automatos.TelaAmbiente2;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.TelaInicialAmbiente2;
 import com.example.montanhadechomsky.guis.tela_ambientes.automatos.TelaInicialAmbiente3;
+import com.example.montanhadechomsky.guis.tela_ambientes.telas_aux.PopUpCustomizado;
 import com.example.montanhadechomsky.guis.tela_detalhes.TelaDetalhes;
 import com.example.montanhadechomsky.guis.tela_opcoes.TelaOpcoes;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import de.hdodenhof.circleimageview.CircleImageView;
 
-import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,24 +42,29 @@ public class MainActivity extends AppCompatActivity {
         startActivity(in);
     }
 
-    public void clickBotaoExpressoesRegulares(View view) {
-        Intent in = new Intent(MainActivity.this, TelaInicialAmbiente1.class);
-        startActivity(in);
-    }
+    public void clickBotaoSobre(View view) {
+        String texto = "Esse aplicativo trás questões sobre &Autômatos Finitos Determinístico& e &Autômatos Finitos" +
+                " Não Determinístico& com a finalidade de reforçar e colocar em prática o assunto sobre ambos.\n\n" +
 
-    public void clickBotaoOpcoes(View view) {
-        Intent in = new Intent(MainActivity.this, TelaOpcoes.class);
+                "O aplicativo é dividido em dois ambientes, o primeiro é o ambiente com questões sobre" +
+                " autômatos finitos determinísticos e o segundo é o ambiente com questões sobre autômatos finitos não" +
+                " determinísticos.\n\n" +
+
+                "Cada ambiente tem seu bloco de questões, as questões de cor branca, são as questões que ainda não foram submetidas nenhuma" +
+                " resposta ou submeteram respostas erradas, e as questões com cor verde, são" +
+                " as questões que foram submetidas respostas certas.";
+
+        PopUpCustomizado pop = new PopUpCustomizado("Detalhes", texto);
+        Intent in = new Intent(MainActivity.this, pop.getClass());
         startActivity(in);
     }
 
     private void inicializarAmbientes(){
-        Controler.getControler().inicializarAmbiente1(this.getBaseContext());
         Controler.getControler().inicializarAmbiente2(this.getBaseContext());
         Controler.getControler().inicializarAmbiente3(this.getBaseContext());
     }
 
     private void carregarQuestoes(){
-        Controler.getControler().carregarQuestoesAmbiente1("Ambiente1");
         Controler.getControler().carregarQuestoesAmbiente2("Ambiente2");
         Controler.getControler().carregarQuestoesAmbiente3("Ambiente3");
     }

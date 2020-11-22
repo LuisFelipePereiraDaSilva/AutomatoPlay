@@ -45,45 +45,6 @@
             />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Utilizar questões padrão"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp"
-            android:textColor="#000"
-            android:background="@drawable/botao_com_sombra2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Carregar arquivo de questões"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp"
-            android:textColor="#000"
-            android:background="@drawable/botao_com_sombra2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Criar arquivo de questões"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp"
-            android:textColor="#000"
-            android:background="@drawable/botao_com_sombra2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"
-            />
-
-        <TextView
             android:onClick="clickBotaoDetalhes"
             android:layout_width="match_parent"
             android:layout_height="50dp"
