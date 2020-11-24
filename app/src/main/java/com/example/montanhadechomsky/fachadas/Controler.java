@@ -68,10 +68,6 @@ public class Controler {
         ambiente2.salvarProblema(problema);
     }
 
-    public void removerProblemaAmbiente2(ProblemaAmbiente2 problema){
-        ambiente2.removerProblema(problema);
-    }
-
     //endregion
 
     //region Ambiente3
@@ -107,10 +103,6 @@ public class Controler {
 
     public void salvarProblemaAmbiente3(ProblemaAmbiente3 problema){
         ambiente3.salvarProblema(problema);
-    }
-
-    public void removerProblemaAmbiente3(ProblemaAmbiente3 problema){
-        ambiente3.removerProblema(problema);
     }
 
     //endregion

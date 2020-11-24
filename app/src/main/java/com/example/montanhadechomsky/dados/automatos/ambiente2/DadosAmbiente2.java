@@ -21,6 +21,20 @@ public class DadosAmbiente2 {
         this.context = context;
     }
 
+    public void limparArquivo(String arquivo) {
+        try {
+            FileOutputStream file;
+            file = context.openFileOutput(arquivo, Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(file);
+            try {
+                os.close();
+            }catch (EOFException e){}
+        }
+        catch(Exception e){
+            mensagemExibir();
+        }
+    }
+
     public void salvar(String arquivo, ProblemaAmbiente2 problema){
         try{
             ArrayList<ProblemaAmbiente2> questoes = ler(arquivo);
@@ -48,10 +62,6 @@ public class DadosAmbiente2 {
         catch(Exception e){
             mensagemExibir();
         }
-    }
-
-    public void remover(String arquivo, ProblemaAmbiente2 problema){
-
     }
 
     public ArrayList<ProblemaAmbiente2> ler(String arquivo){
@@ -93,6 +103,7 @@ public class DadosAmbiente2 {
                 is.close();
             }catch(EOFException e){ }
              catch(Exception e){
+                limparArquivo(arquivo);
                 mensagemExibir();
             }
         }catch(FileNotFoundException e){

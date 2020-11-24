@@ -2,10 +2,13 @@ package com.example.montanhadechomsky.controles.ambientes.automatos.ambiente3;
 
 import com.example.montanhadechomsky.controles.ambientes.automatos.Estado;
 import com.example.montanhadechomsky.controles.ambientes.automatos.ProblemaAutomatos;
+import com.example.montanhadechomsky.controles.ambientes.automatos.ambiente2.AFD;
+import com.example.montanhadechomsky.controles.ambientes.automatos.ambiente3.conversor.controler.Conversor;
 import com.example.montanhadechomsky.fachadas.Controler;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProblemaAmbiente3 extends ProblemaAutomatos implements Serializable {
 
@@ -56,4 +59,83 @@ public class ProblemaAmbiente3 extends ProblemaAutomatos implements Serializable
         this.automato = automato;
     }
 
+    public EntradaAFND converterEntradaAFND(ArrayList<Estado> listaEstados) {
+        String estados = "{";
+        String estadosFinais = "{";
+
+        ArrayList<String> trasicoesAux = new ArrayList<>();
+        for(int i = 0; i < listaEstados.size(); i++) {
+            estados += listaEstados.get(i).getNome() + (i < (listaEstados.size() - 1) ? "," : "");
+            if (listaEstados.get(i).getEstado_aceitacao())
+                estadosFinais += listaEstados.get(i).getNome() + ",";
+            for (int j = 0; j < automato.getAlfabeto().length; j++) {
+                String transicao = "(" + listaEstados.get(i).getNome() + "," + automato.getAlfabeto()[j] + ")->{";
+                boolean existe = false;
+                for (int x = 0; x < listaEstados.get(i).getTransicoes().size(); x++) {
+                    for (int y = 0; y < listaEstados.get(i).getTransicoes().get(x).getSimbolo_alfabeto().length ; y++) {
+                        if (listaEstados.get(i).getTransicoes().get(x).getSimbolo_alfabeto()[y].equals(
+                                automato.getAlfabeto()[j])) {
+                            transicao += listaEstados.get(i).getTransicoes().get(x).getEstadoDestino().getNome() + ",";
+                            existe = true;
+                        }
+                    }
+                }
+                if (existe) {
+                    transicao += "}";
+                    trasicoesAux.add(transicao.replace(",}", "}"));
+                }
+            }
+        }
+
+        estados += "},";
+        estadosFinais += "}";
+        estadosFinais = estadosFinais.replace(",}", "}");
+
+        List<String> transicoes = new ArrayList<>();
+        for (int i = 0; i < trasicoesAux.size(); i++)
+            transicoes.add(trasicoesAux.get(i) + (i < (trasicoesAux.size() - 1) ? "," : ""));
+
+        String estadoInicial = automato.getEstadoInicial().getNome() + ",";
+
+        String alfabeto = "{";
+        for (int i = 0; i < automato.getAlfabeto().length; i++) {
+            alfabeto += automato.getAlfabeto()[i] + ((i < automato.getAlfabeto().length - 1) ? "," : "");
+        }
+        alfabeto += "},";
+
+        EntradaAFND entrada = new EntradaAFND(estados, alfabeto, transicoes, estadoInicial, estadosFinais);
+        return entrada;
+    }
+
+    public boolean validarRespostaUsuario(){
+        EntradaAFND afndResposta = converterEntradaAFND(automato.getEstados());
+        EntradaAFND afndUsuario = converterEntradaAFND(getResposta_secundaria());
+
+        AFD afdResposta = Conversor.converterAfndParaAfd(afndResposta.estados, afndResposta.alfabeto, afndResposta.transicoes,
+                afndResposta.estadoInicial, afndResposta.estadosFinais);
+        AFD afdUsuario = Conversor.converterAfndParaAfd(afndUsuario.estados, afndUsuario.alfabeto, afndUsuario.transicoes,
+                afndUsuario.estadoInicial, afndUsuario.estadosFinais);
+
+        if (afdResposta == null || afdUsuario == null)
+            return false;
+
+        boolean resultado = validarRespostaUsuario(afdResposta, afdUsuario.getEstados());
+        return resultado;
+    }
+
+    private class EntradaAFND {
+        public String estados;
+        private List<String> transicoes;
+        private String estadoInicial;
+        private String estadosFinais;
+        private String alfabeto;
+
+        public EntradaAFND(String estados, String alfabeto, List<String> transicoes, String estadoInicial, String estadosFinais) {
+            this.estados = estados;
+            this.transicoes = transicoes;
+            this.estadoInicial = estadoInicial;
+            this.estadosFinais = estadosFinais;
+            this.alfabeto = alfabeto;
+        }
+    }
 }

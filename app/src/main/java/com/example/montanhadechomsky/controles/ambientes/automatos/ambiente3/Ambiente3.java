@@ -35,7 +35,7 @@ public class Ambiente3 {
 
     public void carregarQuestoes(String arquivo){
         if(arquivo.equals("Ambiente3"))
-            cadastrarQuestoesAfd();
+            cadastrarQuestoesAfnd();
         else
             lista_problemas = repositorio.ler(arquivo);
 
@@ -45,21 +45,23 @@ public class Ambiente3 {
     // colocar imagem tag (*# nome da imagem #*)
     // estado => separa os estados por | e os atributos do estado por _ Ex: q1_true_false (nome: q1, estado_inicial: true, estado_final: false)
     // transicao => separa as trancisoes por | e os atributos da transicao por _ Ex: q1_0_q2 (nome: q1, estado_inicial: true, estado_final: false)
-    private ProblemaAmbiente3 montarQuestao(int numero, String problema, AFND afd){
+    private ProblemaAmbiente3 montarQuestao(int numero, String problema, AFND afnd){
         ProblemaAmbiente3 p = repositorio.getProblema(arquivo, numero);
         if(p == null)
-            p = new ProblemaAmbiente3(numero, problema, afd);
+            p = new ProblemaAmbiente3(numero, problema, afnd);
+        else
+            p.setAutomato(afnd);
         return p;
     }
-    public void cadastrarQuestoesAfd(){
+    public void cadastrarQuestoesAfnd(){
 
         lista_problemas.add(montarQuestao(lista_problemas.size() + 1, "testando problema 1",
-                new AFND("q1_true_false & q2_false_false & q3_false_true",
-                        "q1_0_q2 & q1_1_q1 & q2_0_q2 & q2_1_q3", new String[]{"0", "1"}) ) );
+                new AFND("q1_true_false & q2_false_true & q3_false_true",
+                        "q1_0_q2 & q1_0_q3 & q1_1_q1 & q2_0_q2 & q2_1_q3 & q3_0,1_q3", new String[]{"0", "1", "£"}) ) );
 
         lista_problemas.add(montarQuestao(lista_problemas.size() + 1, "testando problema 2",
                 new AFND("q1_true_false|q2_false_true",
-                        "q1_0_q2 & q1_1_q1 & q2_0_q2 & q2_1_q2", new String[]{"0", "1"}) ) );
+                        "q1_0_q2 & q1_1_q1 & q2_0_q2 & q2_1_q2", new String[]{"0", "1", "£"}) ) );
 
     }
 
@@ -73,9 +75,5 @@ public class Ambiente3 {
 
     public void salvarProblema(ProblemaAmbiente3 problema){
         repositorio.salvar(arquivo, problema);
-    }
-
-    public void removerProblema(ProblemaAmbiente3 problema){
-        repositorio.remover(arquivo, problema);
     }
 }

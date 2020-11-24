@@ -117,8 +117,4 @@ public class Ambiente2 {
     public void salvarProblema(ProblemaAmbiente2 problema){
         repositorio.salvar(arquivo, problema);
     }
-
-    public void removerProblema(ProblemaAmbiente2 problema){
-        repositorio.remover(arquivo, problema);
-    }
 }

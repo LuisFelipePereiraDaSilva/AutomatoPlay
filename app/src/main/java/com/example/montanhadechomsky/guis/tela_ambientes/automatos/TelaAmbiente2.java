@@ -862,6 +862,8 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
             boolean resultado = false;
             if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
                 resultado = Controler.getControler().getQuestaoSelecionadaAmbiente2().validarRespostaUsuario();
+            else if (Controler.getControler().getQuestaoSelecionadaAmbiente3() != null)
+                resultado = Controler.getControler().getQuestaoSelecionadaAmbiente3().validarRespostaUsuario();
 
 
             if (resultado) {
