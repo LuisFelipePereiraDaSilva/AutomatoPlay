@@ -38,17 +38,19 @@ public class Conversor {
             String[] caminhos = null;
             //pego os caminhos de cada estado que compõe o estado do AFD
             for(String estadoAtual : estadosCompoe) {
-                if (afnd.getEstados().get(estadoAtual).getTransicao().get(entrada) != null) {
-                    caminhos = Utils.concatenarArray(caminhos, afnd.getEstados().get(estadoAtual).getTransicao().get(entrada).getCaminhos());
-                    Transicao aux = new Transicao();
-                    aux.setCaminhos(caminhos);
-                    aux = Utils.RemoverRepeticoes(aux);
-                    String estadoNome2 = Utils.arrayToString(aux.getCaminhos());
-                    if(!estadosAfd.containsKey(estadoNome2)) {
-                        estadosAfd.put(estadoNome2, null);
-                        GerarTabelaAfd(estadoNome2, afnd, estadosAfd);
+                if(afnd.getEstados().get(estadoAtual) != null) {
+                    if (afnd.getEstados().get(estadoAtual).getTransicao().get(entrada) != null) {
+                        caminhos = Utils.concatenarArray(caminhos, afnd.getEstados().get(estadoAtual).getTransicao().get(entrada).getCaminhos());
+                        Transicao aux = new Transicao();
+                        aux.setCaminhos(caminhos);
+                        aux = Utils.RemoverRepeticoes(aux);
+                        String estadoNome2 = Utils.arrayToString(aux.getCaminhos());
+                        if (!estadosAfd.containsKey(estadoNome2)) {
+                            estadosAfd.put(estadoNome2, null);
+                            GerarTabelaAfd(estadoNome2, afnd, estadosAfd);
+                        }
+                        caminhos = aux.getCaminhos();
                     }
-                    caminhos = aux.getCaminhos();
                 }
             }
             //Crio uma transicao
@@ -180,6 +182,20 @@ public class Conversor {
             estadosAF.put(funcaoTransicao[0], estadoAuxiliar); //adiciona estado na coleção de estados
         }
 
+        for(int i = 0; i < estadosAux.length;i++){
+            if(estadosAF.get(estadosAux[i]) == null){
+                Estado teste = new Estado();
+                teste.setInicial(false);
+                if(Utils.Exists(estFinal,estadosAux[i])){
+                    teste.setFinal(true);
+                }else {
+                    teste.setFinal(false);
+                }
+                //estadosAF.values();
+                estadosAF.put(estadosAux[i],teste);
+            }
+        }
+
         AfndLamb afndLamb = new AfndLamb(estadosAF, ling);
         afndLamb.setFechoLambda();
         return afndLamb;
@@ -270,11 +286,11 @@ public class Conversor {
     public static AFD converterAfndParaAfd(String estados, String linguagem, List<String> transicoes, String estadoInicial, String estadoFinal) {
         Conversor conversor = new Conversor();
         AfndLamb afndLamb = conversor.tratarDados(estados, linguagem, transicoes, estadoInicial, estadoFinal);
-        for (int i = 0; i < afndLamb.getEstados().size(); i++) {
-            if (afndLamb.getEstados().get(i) == null) {
-                return null;
-            }
-        }
+//        for (int i = 0; i < afndLamb.getEstados().size(); i++) {
+//            if (afndLamb.getEstados().get(i) == null) {
+//                return null;
+//            }
+//        }
         Af afnd = conversor.afndLambToAfnd(afndLamb);
         Af afd = conversor.afndToAfd(afnd);
         AFD afdResult = conversor.escreverAfd(afndLamb, afd);
