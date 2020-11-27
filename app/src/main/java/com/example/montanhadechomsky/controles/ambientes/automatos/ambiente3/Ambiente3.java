@@ -57,7 +57,7 @@ public class Ambiente3 {
 
         lista_problemas.add(montarQuestao(lista_problemas.size() + 1, "testando problema 1",
                 new AFND("q1_true_false & q2_false_true & q3_false_true",
-                        "q1_0_q2 & q1_0_q3 & q1_1_q1 & q2_0_q2 & q2_1_q3 & q3_0,1_q3", new String[]{"0", "1", "£"}) ) );
+                        "q1_0_q2 & q1_0_q3 & q1_1_q1 & q2_0_q2 & q2_1_q3", new String[]{"0", "1", "£"}) ) );
 
         lista_problemas.add(montarQuestao(lista_problemas.size() + 1, "testando problema 2",
                 new AFND("q1_true_false|q2_false_true",
