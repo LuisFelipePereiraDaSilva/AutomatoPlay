@@ -255,6 +255,11 @@ public class DesenharSeta extends View
             }
         }
 
+        float xa = startX;
+        float ya = startY;
+        float xb = mX;
+        float yb = mY;
+
         startX = pontos.get(inicio)[0];
         startY = pontos.get(inicio)[1];
         mX = pontos.get(fim)[0];
@@ -266,22 +271,37 @@ public class DesenharSeta extends View
         }
 
         int resultado = verificarSetaDupla(transicao);
-        int[] cor;
+        int[] cor =  new int[]{0,0,0};
         if(resultado == 0) {
-            cor =  new int[]{0,0,0};
             canvas.drawLine(startX, startY, mX, mY, initPaint(cor));
             transicao.setCordenadas_simbolos(new float[]{pontosAux.get((int)pontosAux.size()/2)[0], pontosAux.get((int)pontosAux.size()/2)[1]});
         }else{
-            double sx = pontos.get(0)[0];
-            double sy = pontos.get(0)[1];
-            double ex = pontos.get(pontos.size() - 1)[0];
-            double ey = pontos.get(pontos.size() - 1)[1];
+            float x0 = xa, y0 = ya, x1 = xb, y1 = yb;
 
-            double x2 = sx + (startX - sx) * Math.cos(Math.PI / 4);
-            double y2 = sy + (startY - sy) * Math.cos(Math.PI / 4);
+            double dx = x1 - x0, dy = y1 - y0;
+            double R = Math.sqrt(dx * dx + dy * dy);
+            double cc = r / R;
+            double angulo = (Math.PI / 4);
 
-            double x3 = x2 + (startX - sx) * Math.sin(Math.PI / 4);
-            double y3 = y2 + (startY - sy) * Math.sin(Math.PI / 4);
+            int sinal = -1;
+
+            double cos = Math.cos(sinal * angulo);
+            double sen = Math.sin(sinal * angulo);
+            float xinicio = x0, yinicio = y0, xfim = x1, yfim = y1;
+            xinicio = (int) Math.round((dx * cc * cos - dy * cc * sen) + x0);
+            yinicio = (int) Math.round((dx * cc * sen + dy * cc * cos) + y0);
+
+            cos = Math.cos(-sinal * angulo + Math.PI);
+            sen = Math.sin(-sinal * angulo + Math.PI);
+            xfim = (int) Math.round((dx * cc * cos - dy * cc * sen) + x1);
+            yfim = (int) Math.round((dx * cc * sen + dy * cc * cos) + y1);
+
+            System.out.println();
+
+            startX = xinicio;
+            startY = yinicio;
+            mX = xfim;
+            mY = yfim;
 
             Paint paint  = new Paint();
             paint.setAntiAlias(true);
@@ -294,18 +314,16 @@ public class DesenharSeta extends View
             float yDiff         = midY - startY;
             double angl        = (Math.atan2(yDiff, xDiff) * (180 / Math.PI)) - 90;
             double angleRadians = Math.toRadians(angl);
-            float pointX = (float) (midX + 45 * Math.cos(angleRadians));
-            float pointY = (float) (midY + 45 * Math.sin(angleRadians));
+            float pointX = (float) (midX + 0 * Math.cos(angleRadians));
+            float pointY = (float) (midY + 0 * Math.sin(angleRadians));
             path.moveTo(startX, startY);
             path.cubicTo(startX,startY,pointX, pointY, mX, mY);
 
             if(resultado == 1) {
                 transicao.setCordenadas_simbolos(new float[]{pointX, pointY});
-                cor =  new int[]{255,0,0};
             }
             else{
                 transicao.setCordenadas_simbolos(new float[]{pointX, pointY});
-                cor =  new int[]{0,0,255};
             }
 
             paint.setColor(new Color().rgb(cor[0], cor[1], cor[2]));
@@ -313,7 +331,6 @@ public class DesenharSeta extends View
         }
 
         GUI.getGui().getTelaAmbiente2().desenharSimbolosSeta(estado, transicao, cor);
-
 
         Matrix arrow_matrix = new Matrix();
 
