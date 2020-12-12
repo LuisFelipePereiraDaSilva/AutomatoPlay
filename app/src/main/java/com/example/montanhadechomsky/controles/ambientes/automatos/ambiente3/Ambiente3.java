@@ -58,8 +58,8 @@ public class Ambiente3 {
                 new AFND("s0_true_false & s1_false_false & s2_false_false & s3_false_true",
                         "s0_a,b_s0 & s0_a_s1 & s1_a_s2 & s2_a_s3 & s3_a_s3 & s3_b_s3", new String[]{"a","b", "£"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,"Desenvolva autômatos que reconheçam a seguinte linguagem: {w ∈ {a, b}* | o sufixo de w é aa}.",
-                new AFND("s0_true_false & s1_false_false & s2_false_true",
-                        "s0_a,b_s0 & s0_a_s1 & s1_a_s2",new String[]{"a","b", "£"})));
+                new AFND("q0_true_false & q1_false_false & q2_false_true",
+                        "q0_a,b_q0 & q0_a_q1 & q1_a_q2",new String[]{"a","b", "£"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,"Desenvolva autômatos que reconheçam a seguinte linguagem: {w ∈{a, b}* | w possui uma quantidade ímpar de a e de b}.",
                 new AFND("s0_true_false & s1_false_false & s2_false_false & sf_false_true,",
                         "s0_a_s1 & s0_b_s2 & s1_a_s0 & s1_b_sf & s2_a_sf & s2_b_s0 & sf_a_s2 & sf_b_s1",new String[]{"a","b", "£"})));
