@@ -99,7 +99,6 @@ public class Ambiente3 {
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,"Desenvolva um Autômato Finito Não-Determinístico (AFN) sobre o alfabeto Σ = {i, j, k}, que reconheça a linguagem L = {w | w possui iik ou jkj ou kji como prefixo, ikki ou jiik ou kjji como subpalavra e ikk ou jii ou kkj como sufixo}.",
                 new AFND("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_false & q5_false_false & q6_false_false & q7_false_false & q8_false_false & q9_false_false & q10_false_false & q11_false_false & q12_false_false & q13_false_false & q14_false_false & q15_false_false & q16_false_false & q17_false_false & q18_false_false & q19_false_false & q20_false_false & q21_false_false & q22_false_false & q23_false_false &  q24_false_true",
                         "q0_j_q3 & q0_i_q1 & q0_k_q5 & q1_i_q2 & q2_k_q7 & q2_k_q9 & q2_k_q14 & q3_k_q4 & q4_j_q7 & q4_j_q11 & q4_j_q15 & q5_j_q6 & q6_i_q7 & q6_i_q8 & q6_i_q12 & q7_i_q7 & q7_i_q8 & q7_j_q7 & q7_j_q11 & q7_k_q7 & q7_k_q14 & q8_k_q9 & q9_k_q10 & q10_i_q17 & q10_i_q18q11_j_q12 & q12_i_q13 & q13_k_q17 & q13_k_q19 & q13_k_q22 & q14_j_q15 & q15_j_q16 & q16_i_q17 & q16_i_q18 & q16_i_q21 & q17_i_q17 & q17_i_q18 & q17_j_q17 & q17_j_q20 & q17_k_q17 & q17_k_q22q18_k_q19 & q19_k_q24 & q20_i_q21 & q21_i_q24 & q22_k_q23 & q23_j_q24",new String[]{"i","j","k", "e"})));
-
     }
 
     public ProblemaAmbiente3 getProblema(int numero){
