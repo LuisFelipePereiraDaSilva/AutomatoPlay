@@ -67,19 +67,50 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             >
-
-                                <TextView
-                                    android:id="@+id/texto_pop_up"
-                                    android:longClickable="true"
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:textSize="20dp"
-                                    android:textColor="#000"
+                                    android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                                    />
+                                    android:orientation="vertical"
+                                    >
+                                        <TextView
+                                            android:id="@+id/texto_pop_up"
+                                            android:longClickable="true"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:textSize="20dp"
+                                            android:textColor="#000"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                            />
 
+                                        <TextView
+                                            android:id="@+id/linha_pop_up"
+                                            android:visibility="gone"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="#000000"
+                                            android:layout_marginTop="20dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_marginLeft="30dp"
+                                            android:layout_marginRight="30dp"
+                                            />
 
+                                        <TextView
+                                            android:id="@+id/link_pop_up"
+                                            android:visibility="gone"
+                                            android:onClick="clickLink"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textAlignment="center"
+                                            android:text="Mais Informações"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                            android:textSize="15dp"
+                                            android:fontFamily="sans-serif"
+                                            android:textColor="#233A64"
+                                            android:padding="5dp"
+                                            android:layout_marginBottom="10dp"
+                                            />
+                                </LinearLayout>
 
                         </ScrollView>
 

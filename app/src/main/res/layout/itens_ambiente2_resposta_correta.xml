@@ -89,7 +89,7 @@
 
                         </GridLayout>
 
-                        <com.example.montanhadechomsky.guis.tela_ambientes.automatos.telas_aux.DesenharSetaRespostaAutomato
+                        <com.automatoplay.guis.tela_ambientes.automatos.telas_aux.DesenharSetaRespostaAutomato
                             android:id="@+id/view_setas"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

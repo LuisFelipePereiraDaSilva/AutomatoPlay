@@ -46,6 +46,53 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginRight="10dp"
+            android:onClick="clickBotaoVoltar"
+            >
+
+            <info.androidhive.fontawesome.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fa_arrow_left_solid"
+                android:textColor="#fff"
+                android:textSize="25dp"
+                app:solid_icon="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:background="@drawable/elipse2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="10dp"
+            android:onClick="clickBotaoProblema"
+            >
+
+            <info.androidhive.fontawesome.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fa_question_solid"
+                android:textColor="#fff"
+                android:textSize="25dp"
+                app:solid_icon="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:background="@drawable/elipse2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="10dp"
             android:onClick="clickBotaoExpandirOuDiminuirMenu"
             >
 
@@ -53,7 +100,7 @@
                 android:id="@+id/botaoMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fa_chevron_right_solid"
+                android:text="@string/fa_chevron_left_solid"
                 android:textColor="#fff"
                 android:textSize="25dp"
                 app:solid_icon="true"
@@ -66,7 +113,7 @@
 
         <HorizontalScrollView
             android:id="@+id/menu"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -75,30 +122,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             >
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:orientation="vertical"
-                    android:background="@drawable/elipse"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_marginRight="10dp"
-                    android:onClick="clickBotaoVoltar"
-                    >
-
-                    <info.androidhive.fontawesome.FontTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fa_arrow_left_solid"
-                        android:textColor="#fff"
-                        android:textSize="25dp"
-                        app:solid_icon="true"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:orientation="vertical"
                     android:background="@drawable/elipse"
@@ -111,7 +134,7 @@
                 <info.androidhive.fontawesome.FontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fa_save_solid"
+                    android:text="@string/fa_play_circle"
                     android:textColor="#fff"
                     android:textSize="25dp"
                     app:solid_icon="true"
@@ -134,7 +157,7 @@
                     <info.androidhive.fontawesome.FontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fa_broom_solid"
+                        android:text="@string/fa_trash_restore_alt_solid"
                         android:textColor="#fff"
                         android:textSize="25dp"
                         app:solid_icon="true"
