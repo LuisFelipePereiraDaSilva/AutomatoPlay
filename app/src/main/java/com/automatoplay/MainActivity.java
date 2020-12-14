@@ -5,11 +5,8 @@ import android.os.Bundle;
 
 import com.automatoplay.fachadas.Controler;
 import com.automatoplay.fachadas.GUI;
-import com.automatoplay.guis.tela_ambientes.automatos.TelaAmbiente2;
 import com.automatoplay.guis.tela_ambientes.automatos.TelaInicialAmbiente2;
 import com.automatoplay.guis.tela_ambientes.automatos.TelaInicialAmbiente3;
-import com.automatoplay.guis.tela_ambientes.telas_aux.PopUpCustomizado;
-import com.automatoplay.guis.tela_detalhes.TelaDetalhes;
 import com.automatoplay.guis.tela_opcoes.TelaOpcoes;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_detalhes) {
-            Intent in = new Intent(MainActivity.this, TelaDetalhes.class);
-            startActivity(in);
+
             return true;
         }
 

@@ -40,6 +40,7 @@ public class ProblemaAmbiente2 extends ProblemaAutomatos implements Serializable
     public void setResposta_submetida(ArrayList<Estado> resposta_submetida) {
         super.setResposta_submetida(resposta_submetida);
         super.setStatus_resposta(StatusResposta.Correta);
+        super.setPorcentagemRespostaCorreta(super.getPorcentagem());
         Controler.getControler().salvarProblemaAmbiente2(this);
     }
 

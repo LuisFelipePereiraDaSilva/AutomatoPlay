@@ -10,6 +10,7 @@ public class ProblemaAmbientes implements Serializable {
     private StatusResposta status_resposta;
     private String problema;
     private int porcentagem = 60;
+    private int porcentagemRespostaCorreta = 60;
 
     public ProblemaAmbientes(int numero, String problema){
         this.numero = numero;
@@ -62,4 +63,13 @@ public class ProblemaAmbientes implements Serializable {
     public void setPorcentagem(int porcentagem) {
         this.porcentagem = porcentagem;
     }
+
+    public int getPorcentagemRespostaCorreta() {
+        return porcentagemRespostaCorreta;
+    }
+
+    public void setPorcentagemRespostaCorreta(int porcentagemRespostaCorreta) {
+        this.porcentagemRespostaCorreta = porcentagemRespostaCorreta;
+    }
+
 }

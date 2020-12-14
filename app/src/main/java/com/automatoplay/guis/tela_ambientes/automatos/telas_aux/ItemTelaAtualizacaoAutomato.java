@@ -1,6 +1,8 @@
 package com.automatoplay.guis.tela_ambientes.automatos.telas_aux;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -79,8 +81,9 @@ public class ItemTelaAtualizacaoAutomato extends Activity {
                 estado.setEstado_aceitacao(true);
             else
                 estado.setEstado_aceitacao(false);
+
+            GUI.getGui().getTelaAmbiente2().atualizarEstadoAutomato(estado, false);
         }
-        else
 
         onStop();
     }
@@ -90,9 +93,26 @@ public class ItemTelaAtualizacaoAutomato extends Activity {
         onStop();
     }
 
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    GUI.getGui().getTelaAmbiente2().removerEstadoAutomato();
+                    onStop();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    //No button clicked
+                    break;
+            }
+        }
+    };
+
     public void clickRemover(View view){
-        GUI.getGui().getTelaAmbiente2().removerEstadoAutomato();
-        onStop();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Tem certeza que deseja realmente excluir este estado?").setPositiveButton("Sim", dialogClickListener)
+                .setNegativeButton("Não", dialogClickListener).show();
     }
 
     public void clickTelaMeio(View view){ }

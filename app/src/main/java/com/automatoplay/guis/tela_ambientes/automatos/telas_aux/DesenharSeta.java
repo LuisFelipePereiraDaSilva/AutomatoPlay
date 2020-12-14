@@ -166,66 +166,6 @@ public class DesenharSeta extends View
             }
         }
 
-        // Até aqui o que aconteceu? foi traçado uma linha que leva do meio do estado de saída até o meio do estado de chegada.
-        /*
-        * Um dos erros está justamente na próxima parte, que é o que deixa a seta um pouco afastada dos automatos.
-        * Isso acontece porque eu tenho pegar um ponto x e y mantendo a direção da seta exatamente na borda do estado.
-        * Se a seta for horizontal ou vertical funciona normal, porque procuro o ponto x e y exatamente subtraindo a metada do quadrado que o
-        * estado está inserido, "que no caso seria o raio do circulo". Porém quando a seta está inclinida e eu pego o ponto subtraindo a
-        * metade do quadrado, ele pega o ponto na diagonal do quadrado, logo a medade do quadrado não é o raio. Isso da a impressão que a
-        * seta não chegou no estado, mas chegou, porém ficou na diagonal do quadrado.
-        *
-        * Então fica a questão, como resolver esse problema? Ele é resolvido pegando o raio do circulo, então como saber o raio de um
-        * circulo dentro de um quadrado?
-        * */
-
-        // Este é o código que eu pego o ponto x e y subtraindo a metade do quadrado
-        /*float a = Math.abs(startX - mX);
-        float b = Math.abs(startY - mY);
-        double d = Math.sqrt((a*a) + (b*b));
-
-        double r = GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-        double xi = (a * r) / d;
-        double yj = (b * r) / d;*/
-
-        int meio = 11;
-        /*for(int i = 0; i < pontos.size(); i++){
-            if (startX == mX || startY == mY) { // se a linha for horintal ou vertical
-                float x = pontos.get(i)[0];
-                float x2 = startX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float x3 = startX - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float y = pontos.get(i)[1];
-                float y2 = startY + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float y3 = startY - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-
-                if ((x == x2 || x == x3 || ((int) x == x2) || ((int) x == x3) || ((int) x == (int) x2) || ((int) x == (int) x3) || ((int) x - 1 == (int) x2) || ((int) x + 1 == (int) x2) || ((int) x - 1 == (int) x3) || ((int) x + 1 == (int) x3)) ||
-                        (y == y2 || y == y3 || ((int) y == x2) || ((int) y == y3) || ((int) y == (int) y2) || ((int) y == (int) y3) || ((int) y - 1 == (int) y2) || ((int) y + 1 == (int) y2) || ((int) y - 1 == (int) y3) || ((int) y + 1 == (int) y3))) {
-                    meio = i;
-                    break;
-                }
-            } else { // linha inclinada
-                float x = pontos.get(i)[0];
-                float x2 = startX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float x3 = startX - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float y = pontos.get(i)[1];
-                float y2 = startY + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float y3 = startY - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-
-                if ( (Math.round(x - xi) == Math.round(x)) || (Math.round(x + xi) == Math.round(x)) ||
-                        (Math.round(y - yj) == Math.round(y)) || (Math.round(y + yj) == Math.round(y))) {
-                    meio = i;
-                    break;
-                }
-
-                //if (( ((int) x - xi == (int) x2) || ((int) x + xi == (int) x2) || ((int) x - xi == (int) x3) || ((int) x + xi == (int) x3)) ||
-                        //( ((int) y - yj == (int) y2) || ((int) y + yj == (int) y2) || ((int) y - yj == (int) y3) || ((int) y + yj == (int) y3))) {
-                    //meio = i;
-                    //break;
-                //}
-            }
-        }*/
-        // -------------------------------------------------------------------------
-
         double r = GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
         double r2 = r * r;
         int inicio = 0;
@@ -266,7 +206,7 @@ public class DesenharSeta extends View
         mY = pontos.get(fim)[1];
 
         ArrayList<float[]> pontosAux = new ArrayList<>();
-        for(int i = meio; i < (pontos.size() - meio); i++) {
+        for(int i = inicio; i < fim; i++) {
             pontosAux.add(pontos.get(i));
         }
 
@@ -295,8 +235,6 @@ public class DesenharSeta extends View
             sen = Math.sin(-sinal * angulo + Math.PI);
             xfim = (int) Math.round((dx * cc * cos - dy * cc * sen) + x1);
             yfim = (int) Math.round((dx * cc * sen + dy * cc * cos) + y1);
-
-            System.out.println();
 
             startX = xinicio;
             startY = yinicio;
@@ -343,7 +281,6 @@ public class DesenharSeta extends View
         arrow_path.transform(arrow_matrix);
 
         canvas.drawPath(arrow_path, initPaint(cor));
-
     }
     private int mod100(float y){
         int resultado = 1;

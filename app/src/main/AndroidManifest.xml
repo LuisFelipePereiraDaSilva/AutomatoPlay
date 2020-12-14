@@ -75,10 +75,6 @@
             android:theme="@style/AppTheme.NoActionBarPopUp">
         </activity>
 
-        <activity android:name="com.automatoplay.guis.tela_detalhes.TelaDetalhes"
-            android:theme="@style/AppTheme.NoActionBarPopUp">
-        </activity>
-
         <activity android:name="com.automatoplay.guis.tela_ambientes.automatos.telas_aux.ItemTelaRespostaAutomato"
             android:theme="@style/AppTheme.NoActionBarPopUp">
         </activity>

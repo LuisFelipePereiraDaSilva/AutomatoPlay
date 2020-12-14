@@ -134,7 +134,7 @@
                 <info.androidhive.fontawesome.FontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fa_save_solid"
+                    android:text="@string/fa_play_circle"
                     android:textColor="#fff"
                     android:textSize="25dp"
                     app:solid_icon="true"
@@ -157,7 +157,7 @@
                     <info.androidhive.fontawesome.FontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fa_broom_solid"
+                        android:text="@string/fa_trash_restore_alt_solid"
                         android:textColor="#fff"
                         android:textSize="25dp"
                         app:solid_icon="true"

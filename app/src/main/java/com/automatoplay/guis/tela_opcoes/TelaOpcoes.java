@@ -46,7 +46,7 @@ public class TelaOpcoes extends AppCompatActivity {
                 " resposta ou submeteram respostas erradas, e as questões com cor verde, são" +
                 " as questões que foram submetidas respostas certas.";
 
-        PopUpCustomizado pop = new PopUpCustomizado("Detalhes", texto);
+        PopUpCustomizado pop = new PopUpCustomizado("Detalhes", texto, "https://sites.google.com/view/automatoplay");
         Intent in = new Intent(TelaOpcoes.this, pop.getClass());
         startActivity(in);
     }
