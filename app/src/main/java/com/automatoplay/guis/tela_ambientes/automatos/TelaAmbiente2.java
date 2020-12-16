@@ -1,5 +1,6 @@
 package com.automatoplay.guis.tela_ambientes.automatos;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -561,7 +562,7 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
                 img.setRotation(90);
             }
         }
-        desenharSimbolosSeta(estado, transicao, new int[]{0,0,255});
+        desenharSimbolosSeta(estado, transicao, new int[]{0,0,0});
         tela_grade.addView(img);
     }
 
@@ -821,29 +822,34 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private boolean bloquearClick = false;
-    public void clickAbadonar(View view){
-        if(!bloquearClick) {
-            bloquearClick = true;
-            if (GUI.getGui().getItemTelaDesenhoAutomato().getPorcetagem() != 60) {
-                tamanho_antigo = GUI.getGui().getItemTelaDesenhoAutomato().getWidth();
-                GUI.getGui().getItemTelaDesenhoAutomato().setPorcetagem(60);
-                auxClickZoom();
-            }
-            if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
-                GUI.getGui().getTelaInicialAmbiente2().atualizarQuestaoAmbiente2();
-            else
-                GUI.getGui().getTelaInicialAmbiente3().atualizarQuestaoAmbiente3();
-            finish();
-        }
-    }
 
-    public void clickBotaoLimpar(View view){
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    clickBotaoLimparAux();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    //No button clicked
+                    break;
+            }
+        }
+    };
+
+    public void clickBotaoLimparAux() {
         GUI.getGui().getItemTelaDesenhoAutomato().getListaEstadosAutomato().clear();
         g.removeAllViews();
         tela_grade.removeAllViews();
         criarGrade();
         salvarRespostaSecundaria();
         verificarExisteEstados();
+    }
+    public void clickBotaoLimpar(View view){
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setMessage("Tem certeza que deseja realmente desfazer este autômato?").setPositiveButton("Sim", dialogClickListener)
+                .setNegativeButton("Não", dialogClickListener).show();
     }
 
     public void clickBotaoProblema(View view){

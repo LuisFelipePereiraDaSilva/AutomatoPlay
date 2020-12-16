@@ -48,12 +48,13 @@ public class ItemTelaRespostaAutomato extends Activity {
         tela_grade_simbolos = findViewById(R.id.tela_grade_simbolos);
         view = findViewById(R.id.view_setas);
 
-        item = new ItemTelaDesenhoAutomato(60);
-        if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
+        if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null) {
+            item = new ItemTelaDesenhoAutomato(Controler.getControler().getQuestaoSelecionadaAmbiente2().getPorcentagemRespostaCorreta());
             item.setListaEstadosAutomato(Controler.getControler().getQuestaoSelecionadaAmbiente2().getResposta_submetida());
-        else
+        } else {
+            item = new ItemTelaDesenhoAutomato(Controler.getControler().getQuestaoSelecionadaAmbiente3().getPorcentagemRespostaCorreta());
             item.setListaEstadosAutomato(Controler.getControler().getQuestaoSelecionadaAmbiente3().getResposta_submetida());
-
+        }
         criarGrade();
     }
 
@@ -120,25 +121,6 @@ public class ItemTelaRespostaAutomato extends Activity {
         t.setLayoutParams(tamanho);
         t.setGravity(Gravity.CENTER);
         c.addView(t);
-    }
-
-    public void atualizarSetasZoom(int id, float x, float y){
-        try {
-            float ax = (x / tamanho_antigo) * item.getWidth();
-            float ay = (y / tamanho_antigo) * item.getHeiht();
-
-            Estado estado = item.getEstadoAutomato(id);
-            ArrayList<Estado> estados = item.getListaEstadosAutomato();
-            for (int i = 0; i < estados.size(); i++) {
-                Estado a = estados.get(i);
-                a.atualizarSeta(x, y, ax, ay);
-            }
-            estado.setCordenadas(new float[]{ax, ay});
-            estado.atualizarCordenadasMinhaSeta(ax, ay);
-        }
-        catch (Exception e){
-            Toast.makeText(this, "Desculpe, mas algo deu errado!", Toast.LENGTH_LONG).show();
-        }
     }
 
     public void limparTelaGradeSimbolos(){
@@ -243,7 +225,7 @@ public class ItemTelaRespostaAutomato extends Activity {
                 img.setRotation(90);
             }
         }
-        desenharSimbolosSeta(estado, transicao, new int[]{0,0,255});
+        desenharSimbolosSeta(estado, transicao, new int[]{0,0,0});
         tela_grade.addView(img);
     }
 

@@ -24,7 +24,7 @@ public class AfndLamb extends Af {
     }
     private void calcularFecho(String key) {
         if (this.getEstados().get(key) != null) {
-            Transicao lamb = this.getEstados().get(key).getTransicao().get(".");
+            Transicao lamb = this.getEstados().get(key).getTransicao().get("e");//alteração do simbolo do estado vazio
             if (lamb != null) {
                 String[] transLamb = lamb.getCaminhos();
                 Transicao fechoAtual = null ;

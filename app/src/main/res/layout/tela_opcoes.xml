@@ -45,7 +45,21 @@
             />
 
         <TextView
-            android:onClick="clickBotaoDetalhes"
+            android:onClick="clickBotaoInstrucoes"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Instruções"
+            android:gravity="center"
+            android:layout_marginHorizontal="15dp"
+            android:textColor="#000"
+            android:background="@drawable/botao_com_sombra2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:onClick="clickBotaoSobre"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Sobre o Autômato Play"

@@ -42,6 +42,7 @@ public class ProblemaAmbiente3 extends ProblemaAutomatos implements Serializable
     public void setResposta_submetida(ArrayList<Estado> resposta_submetida) {
         super.setResposta_submetida(resposta_submetida);
         super.setStatus_resposta(StatusResposta.Correta);
+        super.setPorcentagemRespostaCorreta(super.getPorcentagem());
         Controler.getControler().salvarProblemaAmbiente3(this);
     }
 
@@ -95,7 +96,15 @@ public class ProblemaAmbiente3 extends ProblemaAutomatos implements Serializable
         for (int i = 0; i < trasicoesAux.size(); i++)
             transicoes.add(trasicoesAux.get(i) + (i < (trasicoesAux.size() - 1) ? "," : ""));
 
-        String estadoInicial = automato.getEstadoInicial().getNome() + ",";
+        String estadoInicial = null;
+        for(int i = 0; i<listaEstados.size();i++){
+            if(listaEstados.get(i).getEstado_inicial()==true){
+                estadoInicial = listaEstados.get(i).getNome()+",";
+                break;
+            }
+        }
+
+        //String estadoInicial = automato.getEstadoInicial().getNome() + ",";
 
         String alfabeto = "{";
         for (int i = 0; i < automato.getAlfabeto().length; i++) {
@@ -111,10 +120,8 @@ public class ProblemaAmbiente3 extends ProblemaAutomatos implements Serializable
         EntradaAFND afndResposta = converterEntradaAFND(automato.getEstados());
         EntradaAFND afndUsuario = converterEntradaAFND(getResposta_secundaria());
 
-        AFD afdResposta = Conversor.converterAfndParaAfd(afndResposta.estados, afndResposta.alfabeto, afndResposta.transicoes,
-                afndResposta.estadoInicial, afndResposta.estadosFinais);
-        AFD afdUsuario = Conversor.converterAfndParaAfd(afndUsuario.estados, afndUsuario.alfabeto, afndUsuario.transicoes,
-                afndUsuario.estadoInicial, afndUsuario.estadosFinais);
+        AFD afdResposta = Conversor.converterAfndParaAfd(afndResposta.estados, afndResposta.alfabeto, afndResposta.transicoes,afndResposta.estadoInicial, afndResposta.estadosFinais);
+        AFD afdUsuario = Conversor.converterAfndParaAfd(afndUsuario.estados, afndUsuario.alfabeto, afndUsuario.transicoes,afndUsuario.estadoInicial, afndUsuario.estadosFinais);
 
         if (afdResposta == null || afdUsuario == null)
             return false;

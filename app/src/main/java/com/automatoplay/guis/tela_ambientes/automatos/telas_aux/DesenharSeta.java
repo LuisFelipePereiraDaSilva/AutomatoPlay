@@ -161,77 +161,86 @@ public class DesenharSeta extends View
                     }
                 }
                 pontos.add(new float[]{startX + cont1, startY + cont2});
-                if (startY + cont2 == mY || startX + cont1 == mX) // verifica se a linha chegou no está de chegada
+                if (startY + cont2 == mY || startX + cont1 == mX) // verifica se a linha chegou no estado de chegada
                     break;
             }
         }
 
-        // Até aqui o que aconteceu? foi traçado uma linha que leva do meio do estado de saída até o meio do estado de chegada.
-        /*
-        * Um dos erros está justamente na próxima parte, que é o que deixa a seta um pouco afastada dos automatos.
-        * Isso acontece porque eu tenho pegar um ponto x e y mantendo a direção da seta exatamente na borda do estado.
-        * Se a seta for horizontal ou vertical funciona normal, porque procuro o ponto x e y exatamente subtraindo a metada do quadrado que o
-        * estado está inserido, "que no caso seria o raio do circulo". Porém quando a seta está inclinida e eu pego o ponto subtraindo a
-        * metade do quadrado, ele pega o ponto na diagonal do quadrado, logo a medade do quadrado não é o raio. Isso da a impressão que a
-        * seta não chegou no estado, mas chegou, porém ficou na diagonal do quadrado.
-        *
-        * Então fica a questão, como resolver esse problema? Ele é resolvido pegando o raio do circulo, então como saber o raio de um
-        * circulo dentro de um quadrado?
-        * */
+        double r = GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+        double r2 = r * r;
+        int inicio = 0;
+        int fim = pontos.size() - 1;
 
-        // Este é o código que eu pego o ponto x e y subtraindo a metade do quadrado
-        int meio = 11;
-        for(int i = 0; i < pontos.size(); i++){
-            if (startX == mX || startY == mY) { // se a linha for horintal ou vertical
-                float x = pontos.get(i)[0];
-                float x2 = startX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float x3 = startX - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float y = pontos.get(i)[1];
-                float y2 = startY + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float y3 = startY - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+        for (int i = 0; i < pontos.size(); i++) {
+            double dx = pontos.get(i)[0] - startX;
+            double dy = pontos.get(i)[1] - startY;
 
-                if ((x == x2 || x == x3 || ((int) x == x2) || ((int) x == x3) || ((int) x == (int) x2) || ((int) x == (int) x3) || ((int) x - 1 == (int) x2) || ((int) x + 1 == (int) x2) || ((int) x - 1 == (int) x3) || ((int) x + 1 == (int) x3)) ||
-                        (y == y2 || y == y3 || ((int) y == x2) || ((int) y == y3) || ((int) y == (int) y2) || ((int) y == (int) y3) || ((int) y - 1 == (int) y2) || ((int) y + 1 == (int) y2) || ((int) y - 1 == (int) y3) || ((int) y + 1 == (int) y3))) {
-                    meio = i;
-                    break;
-                }
-            } else { // linha inclinada
-                float x = pontos.get(i)[0];
-                float x2 = startX + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float x3 = startX - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float y = pontos.get(i)[1];
-                float y2 = startY + GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
-                float y3 = startY - GUI.getGui().getItemTelaDesenhoAutomato().getWidth() / 2;
+            double dd = (dx * dx) + (dy * dy);
 
-                if (( ((int) x - 15 == (int) x2) || ((int) x + 15 == (int) x2) || ((int) x - 15 == (int) x3) || ((int) x + 15 == (int) x3)) ||
-                        ( ((int) y - 15 == (int) y2) || ((int) y + 15 == (int) y2) || ((int) y - 15 == (int) y3) || ((int) y + 15 == (int) y3))) {
-                    meio = i;
-                    break;
-                }
+            if (dd >= r2) {
+                inicio = i;
+                break;
             }
         }
-        // -------------------------------------------------------------------------
 
-        startX = pontos.get(meio)[0];
-        startY = pontos.get(meio)[1];
-        mX = pontos.get(pontos.size() - 1 - meio)[0];
-        mY = pontos.get(pontos.size() - 1 - meio)[1];
+        for (int i = pontos.size() - 1; i >= 0; i--) {
+            double dx = pontos.get(i)[0] - mX;
+            double dy = pontos.get(i)[1] - mY;
+
+            double dd = (dx * dx) + (dy * dy);
+
+            if (dd >= r2) {
+                fim = i;
+                break;
+            }
+        }
+
+        float xa = startX;
+        float ya = startY;
+        float xb = mX;
+        float yb = mY;
+
+        startX = pontos.get(inicio)[0];
+        startY = pontos.get(inicio)[1];
+        mX = pontos.get(fim)[0];
+        mY = pontos.get(fim)[1];
 
         ArrayList<float[]> pontosAux = new ArrayList<>();
-        for(int i = meio; i < (pontos.size() - meio); i++) {
+        for(int i = inicio; i < fim; i++) {
             pontosAux.add(pontos.get(i));
         }
 
-        float aa = pontosAux.get((int)pontosAux.size()/2)[1];
-        float bb = pontos.get((int)pontos.size()/2)[1];
-
         int resultado = verificarSetaDupla(transicao);
-        int[] cor;
+        int[] cor =  new int[]{0,0,0};
         if(resultado == 0) {
-            cor =  new int[]{0,0,0};
             canvas.drawLine(startX, startY, mX, mY, initPaint(cor));
             transicao.setCordenadas_simbolos(new float[]{pontosAux.get((int)pontosAux.size()/2)[0], pontosAux.get((int)pontosAux.size()/2)[1]});
         }else{
+            float x0 = xa, y0 = ya, x1 = xb, y1 = yb;
+
+            double dx = x1 - x0, dy = y1 - y0;
+            double R = Math.sqrt(dx * dx + dy * dy);
+            double cc = r / R;
+            double angulo = (Math.PI / 4);
+
+            int sinal = -1;
+
+            double cos = Math.cos(sinal * angulo);
+            double sen = Math.sin(sinal * angulo);
+            float xinicio = x0, yinicio = y0, xfim = x1, yfim = y1;
+            xinicio = (int) Math.round((dx * cc * cos - dy * cc * sen) + x0);
+            yinicio = (int) Math.round((dx * cc * sen + dy * cc * cos) + y0);
+
+            cos = Math.cos(-sinal * angulo + Math.PI);
+            sen = Math.sin(-sinal * angulo + Math.PI);
+            xfim = (int) Math.round((dx * cc * cos - dy * cc * sen) + x1);
+            yfim = (int) Math.round((dx * cc * sen + dy * cc * cos) + y1);
+
+            startX = xinicio;
+            startY = yinicio;
+            mX = xfim;
+            mY = yfim;
+
             Paint paint  = new Paint();
             paint.setAntiAlias(true);
             paint.setStyle(Paint.Style.STROKE);
@@ -243,19 +252,16 @@ public class DesenharSeta extends View
             float yDiff         = midY - startY;
             double angl        = (Math.atan2(yDiff, xDiff) * (180 / Math.PI)) - 90;
             double angleRadians = Math.toRadians(angl);
-            float pointX = (float) (midX + 40 * Math.cos(angleRadians));
-            float pointY = (float) (midY + 40 * Math.sin(angleRadians));
+            float pointX = (float) (midX + 0 * Math.cos(angleRadians));
+            float pointY = (float) (midY + 0 * Math.sin(angleRadians));
             path.moveTo(startX, startY);
             path.cubicTo(startX,startY,pointX, pointY, mX, mY);
 
             if(resultado == 1) {
-                transicao.setCordenadas_simbolos(new float[]{pontos.get(pontos.size() - 1 - meio)[0], pontos.get(pontos.size() - 1 - meio)[1]});
-                cor =  new int[]{255,0,0};
-
+                transicao.setCordenadas_simbolos(new float[]{pointX, pointY});
             }
             else{
-                transicao.setCordenadas_simbolos(new float[]{pontos.get(pontos.size() - 1 - meio)[0], pontos.get(pontos.size() - 1 - meio)[1]});
-                cor =  new int[]{0,0,255};
+                transicao.setCordenadas_simbolos(new float[]{pointX, pointY});
             }
 
             paint.setColor(new Color().rgb(cor[0], cor[1], cor[2]));
@@ -263,7 +269,6 @@ public class DesenharSeta extends View
         }
 
         GUI.getGui().getTelaAmbiente2().desenharSimbolosSeta(estado, transicao, cor);
-
 
         Matrix arrow_matrix = new Matrix();
 
@@ -276,7 +281,6 @@ public class DesenharSeta extends View
         arrow_path.transform(arrow_matrix);
 
         canvas.drawPath(arrow_path, initPaint(cor));
-
     }
     private int mod100(float y){
         int resultado = 1;

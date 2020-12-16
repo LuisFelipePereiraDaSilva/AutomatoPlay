@@ -5,11 +5,9 @@ import android.os.Bundle;
 
 import com.automatoplay.fachadas.Controler;
 import com.automatoplay.fachadas.GUI;
-import com.automatoplay.guis.tela_ambientes.automatos.TelaAmbiente2;
 import com.automatoplay.guis.tela_ambientes.automatos.TelaInicialAmbiente2;
 import com.automatoplay.guis.tela_ambientes.automatos.TelaInicialAmbiente3;
-import com.automatoplay.guis.tela_ambientes.telas_aux.PopUpCustomizado;
-import com.automatoplay.guis.tela_detalhes.TelaDetalhes;
+import com.automatoplay.guis.tela_opcoes.TelaOpcoes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,34 +40,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(in);
     }
 
-    public void clickBotaoSobre(View view) {
-        String texto = "Esse aplicativo trás questões sobre &Autômatos Finitos Determinístico& e &Autômatos Finitos" +
-                " Não Determinístico& com a finalidade de reforçar e colocar em prática o assunto sobre ambos.\n\n" +
-
-                "O aplicativo é dividido em dois ambientes, o primeiro é o ambiente com questões sobre" +
-                " autômatos finitos determinísticos e o segundo é o ambiente com questões sobre autômatos finitos não" +
-                " determinísticos.\n\n" +
-
-                "Cada ambiente tem seu bloco de questões, as questões de cor branca, são as questões que ainda não foram submetidas nenhuma" +
-                " resposta ou submeteram respostas erradas, e as questões com cor verde, são" +
-                " as questões que foram submetidas respostas certas.";
-
-        PopUpCustomizado pop = new PopUpCustomizado("Detalhes", texto);
-        Intent in = new Intent(MainActivity.this, pop.getClass());
-        startActivity(in);
-    }
-
-    public void clickBotaoInstrucoes(View view){
-        PopUpCustomizado pop = new PopUpCustomizado("Instruções Ambiente da Questão",
-                "&Instruções:& " + Controler.getControler().getInstrucoesAmbiente2E3());
-        Intent in = new Intent(MainActivity.this, pop.getClass());
-        startActivity(in);
-    }
-
-    public void clickBotaoAjuda(View view){
-        PopUpCustomizado pop = new PopUpCustomizado("Ajuda Ambiente da Questão",
-                Controler.getControler().getAjudaAmbiente2E3());
-        Intent in = new Intent(MainActivity.this, pop.getClass());
+    public void clickBotaoOpcoes(View view){
+        Intent in = new Intent(MainActivity.this, TelaOpcoes.class);
         startActivity(in);
     }
 
@@ -99,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_detalhes) {
-            Intent in = new Intent(MainActivity.this, TelaDetalhes.class);
-            startActivity(in);
+
             return true;
         }
 

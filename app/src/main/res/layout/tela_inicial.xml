@@ -61,10 +61,10 @@
             />
 
         <TextView
-            android:onClick="clickBotaoSobre"
+            android:onClick="clickBotaoOpcoes"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Sobre o Autômato Play"
+            android:text="Opções"
             android:gravity="center"
             android:layout_marginHorizontal="15dp"
             android:textColor="#fff"
@@ -72,33 +72,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="20dp"
             android:layout_marginBottom="10dp"
-            />
-
-        <TextView
-            android:onClick="clickBotaoAjuda"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Ajuda"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp"
-            android:textColor="#fff"
-            android:background="@drawable/botao_com_sombra"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"
-            />
-
-        <TextView
-            android:onClick="clickBotaoInstrucoes"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Instruções"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp"
-            android:textColor="#fff"
-            android:background="@drawable/botao_com_sombra"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20dp"
             />
 
     </LinearLayout>
