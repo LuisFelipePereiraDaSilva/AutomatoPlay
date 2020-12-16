@@ -70,12 +70,12 @@ public class Ambiente2 {
                         "s0_b_s1 & s1_c_s2 & s2_c_s2 & s2_b,a_s3 & s3_b,a_s3", new String[]{"a", "b", "c"}) ) );
 
         lista_problemas.add(montarQuestao(lista_problemas.size() + 1,
-                "Descreva o diagrama associada ao AFD descrito pela seguinte tabela de transição: (*# afd_q4 #*) A = < {a, b}, {S0, S1, S2, S3}, S0, δ, {S0, S2} >.",
+                "Descreva o diagrama associada ao AFD descrito pela seguinte tabela de transição: (*# afd_img1 #*) A = < {a, b}, {S0, S1, S2, S3}, S0, δ, {S0, S2} >.",
                 new AFD("s0_true_true & s1_false_false & s2_false_true & s3_false_false",
                         "s0_a_s1 & s0_b_s3 & s1_a_s2 & s1_b_s0 & s2_a_s3 & s2_b_s1 & s3_a_s0 & s3_b_s2", new String[]{"a", "b"}) ) );
 
         lista_problemas.add(montarQuestao(lista_problemas.size() + 1,
-                "Dado seguinte autômato A = < {0,1}, {S0, S1, S2, S3}, S0, δ, {S3} >  com a tabela de transição mostrada na figura (*# afd_q5 #*), construa o diagrama equivalente desse autômato:",
+                "Dado seguinte autômato A = < {0,1}, {S0, S1, S2, S3}, S0, δ, {S3} >  com a tabela de transição mostrada na figura (*# afd_img2 #*), construa o diagrama equivalente desse autômato:",
                 new AFD("s0_true_false & s01_false_false & s02_false_false & s012_false_false & s0123_false_true & s013_false_true & s023_false_true & s03_false_true",
                         "s0_1_s0 & s0_0_s01 & s01_0_s012 & s01_1_s02 & s012_0_s0123 & s012_1_s02 & s02_1_s0 & s02_0_s013 & s0123_0_s0123 & s0123_1_s023 & s013_0_s0123 & s013_1_s023 & s023_0_s013 & s023_1_s03 & s03_0_s013 & s03_1_s03", new String[]{"0", "1"}) ) );
 
@@ -219,7 +219,7 @@ public class Ambiente2 {
 
 
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,
-                "Dê o diagrama de estados deste AFD. (*#questao30_afd#*)",
+                "Dê o diagrama de estados deste AFD. (*#afd_img3#*)",
                 new AFD("q1_true_false & q2_false_false & q3_false_true & q4_false_false & q5_false_false",
                         "q1_d_q1 & q1_u_q2 & q2_d_q1 & q2_u_q3 & q3_d_q2 & q3_u_q4 & q4_d_q3 & q4_u_q5 & q5_d_q4 & q5_u_q5",new String[]{"u", "d"})));
 //Questoes pares de isaac
