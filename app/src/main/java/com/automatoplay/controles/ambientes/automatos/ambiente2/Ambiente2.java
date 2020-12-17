@@ -203,20 +203,20 @@ public class Ambiente2 {
                         "q0_a_q2 & q0_b_q1 & q1_a_q1 & q1_b_q1 & q2_a_q2 & q2_b_q2",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//37
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular a(a+b*).",
-                new AFD("q0_true_false & q1_false_false & q2_false_true & q3_false_false",
-                        "q0_a_q1 & q1_a,b_q2 & q2_b_q2 & q0_b_q3 & q2_a_q3 & q3_a,b_q3",new String[]{"a", "b"})));
+                new AFD("q0_true_false & q1_false_true & q2_false_true & q3_false_true & q4_false_false",
+                        "q0_a_q1 & q0_b_q4 & q1_a_q3 & q1_b_q2 & q2_a_q4 & q2_b_q2 & q3_a,b_q4 & q4_a,b_q4",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//38
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular ab(a+b)*.",
                 new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_true",
                         "q0_a_q2 & q0_b_q1 & q1_a_q1 & q1_b_q1 & q2_a_q1 & q2_b_q3 & q3_a_q3 & q3_b_q3",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//39
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (a+b)*a.",
-                new AFD("q0_true_true & q1_false_true & q2_false_false",
-                        "q0_b_q0 & q0_a_q1 & q1_a_q1 & q1_b_q2 & q2_a,b_q2",new String[]{"a", "b"})));
+                new AFD("q0_true_true & q1_false_true",
+                        "q0_b_q0 & q0_a_q1 & q1_a_q1 & q1_b_q0",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//40
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (a+b)*ab.",
-                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_true & q4_false_false",
-                        "q0_a_q1 & q0_b_q2 & q1_a_q1 & q1_b_q3 & q2_a_q1 & q2_b_q2 & q3_a_q4 & q3_b_q4 & q4_a_q4 & q4_b_q4",new String[]{"a", "b"})));
+                new AFD("q0_true_false & q1_false_false & q2_false_true",
+                        "q0_a_q1 & q0_b_q0 & q1_a_q1 & q1_b_q2 & q2_a_q1 & q2_b_q0",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//41
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (a+b)*a(a+b)*.",
                 new AFD("q0_true_false & q1_false_true",
@@ -228,35 +228,35 @@ public class Ambiente2 {
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//43
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (a+b)(a+b)*ab(a+b)*.",
                 new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_true & q5_false_false",
-                        "q0_a,b_q1 & q1_a_q2 & q2_b_q1 & q2_a_q3 & q3_b_q4 & q4_q,b_q4 & q1_b_q5 & q3_a_q5 & q5_a,b_q5",new String[]{"a", "b"})));
+                        "q0_a_q1 & q0_b_q2 & q1_a_q3 & q1_b_q1 & q2_a_q3 & q2_b_q2 & q3_a_q5 & q3_b_q4 & q4_a,b_q4 & q5_a,b_q5",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//44
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (a+b)*ab(a+b)*(a+b).",
                 new AFD("q0_true_false & q1_false_fasle & q2_false_false & q3_false_false & q4_false_true",
                         "q0_a_q2 & q0_b_q1 & q1_a_q2 & q1_b_q1 & q2_a_q2 & q2_b_q3 & q3_a_q4 & q3_b_q4 & q4_a_q4 & q4_b_q4",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//45
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (a+b)(a+b)*ab(a+b)*(a+b).",
-                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_true & q5_false_false",
-                        "q0_a,b_q1 & q1_a_q2 & q2_b_q1 & q2_a_q3 & q3_b_q4 & q4_q,b_q4 & q1_b_q5 & q3_a_q5 & q5_a,b_q5 ",new String[]{"a", "b"})));
+                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_true",
+                        "q0_a,b_q1 & q1_a_q2 & q1_b_q1 & q2_a_q2 & q2_b_q2 & q3_a,b_q4 & q4_a,b_q4",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//46
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (aa+b)*.",
-                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_true & q4_false_false",
-                        "q0_a_q1 & q0_b_q3 & q1_a_q3 & q1_b_q2 & q2_a_q2 & q2_b_q2 & q3_a_q4 & q3_b_q3 & q4_a_q3 & q4_b_q2",new String[]{"a", "b"})));
+                new AFD("q0_true_true & q1_false_false & q2_false_false",
+                        "q0_a_q1 & q0_b_q0 & q1_a_q0 & q1_b_q2 & q2_a_q2 & q2_b_q2",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//47
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (aa+bbb)*.",
-                new AFD("q0_true_false & q1_false_false & q2_false_true & q3_false_false & q4_false_false & q5_false_false",
-                        "q0_a_q1 & q1_a_q2 & q2_a,b_q0 & q0_b_q3 & q3_b_q4 & q4_b_q0 & q1_b_q5 & q3_a_q5 & q4_a_q5 & q5_a,b_q5",new String[]{"a", "b"})));
+                new AFD("q0_true_true & q1_false_false & q2_false_false & q3_false_false & q4_false_false & q5_false_false",
+                        "q0_a_q1 & q0_b_q3 & q1_a_q0 & q1_b_q2 & q2_a,b_q2 & q3_a_q5 & q3_b_q4 & q4_a_q5 & q4_b_q0 & q5_a,b_q5",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//48
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (aa+bbb)(a+b)*.",
-                new AFD("q0_true_false & q1_false_false & q2_false_true & q3_false_false & q4_false_false & q5_false_false",
-                        "q0_a_q1 & q0_b_q3 & q1_a_q2 & q1_b_q5 & q2_a_q2 & q2_b_q2 & q3_a_q5 & q3_b_q4 & q4_a_q5 & q4_b_q2 & q5_a_q5 & q6_b_q6",new String[]{"a", "b"})));
+                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_false & q5_false_true",
+                        "q0_a_q1 & q0_b_q2 & q1_a_q5 & q1_b_q4 & q2_a_q4 & q2_b_q3 & q3_a_q4 & q3_b_q5 & q4_a,b_q4 & q5_a,b_q5",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//49
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular ((aa+bbb)(a+b)*)*.",
-                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_true & q5_false_true & q6_false_false",
-                        "q0_a_q1 & q1_a_q4 & q0_b_q2 & q2_b_q3 & q3_b_q4 & q4_a_q5 & q4_b_q0 & q5_a_q0 & q5_b_q4 & q1_b_q6 & q2_a_q6 & q3_a_q6 & q6_a,b_q6",new String[]{"a", "b"})));
+                new AFD("q0_true_false & q1_false_false & q2_false_true & q3_false_false & q4_false_false & q5_false_false",
+                        "q0_a_q1 & q0_b_q3 & q1_a_q2 & q1_b_q5 & q2_a,b_q2 & q3_a_q5 & q3_b_q4 & q4_a_q5 & q4_b_q2 & q5_a,b_q5",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//50
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular ((aa+bbb)(a+b)*)*bb.",
-                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_false & q5_false_true & q6_false_false & q7_false_false & q8_false_true",
-                        "q0_a_q1 & q0_b_q2 & q1_a_q4 & q1_b_q3 & q2_a_q3 & q2_b_q5 & q3_a_q3 & q3_b_q3 & q4_a_q6 & q4_b_q7 & q5_a_q3 & q5_b_q4 & q6_a_q6 & q6_b_q7 & q7_a_q6 & q7_b_q8 & q8_a_q6 & q8_b_q8",new String[]{"a", "b"})));
+                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_false & q5_false_false & q6_false_false & q7_false_false & q8_false_true",
+                        "q0_a_q1 & q0_b_q2 & q1_a_q5 & q1_b_q3 & q2_a_q3 & q2_b_q4 & q3_a,b_q3 & q4_a_q3 & q4_b_q5 & q5_a_q6 & q5_b_q7 & q6_a_q6 & q6_b_q7 & q7_a_q6 & q7_b_q8 & q8_a_q6 & q8_b_q8",new String[]{"a", "b"})));
 
         lista_problemas.add(montarQuestao(lista_problemas.size() + 1,
                 "Construa um AFD para a seguinte Expressão Regular: ab(bb)*cc*",
