@@ -117,6 +117,21 @@ public class ProblemaAmbiente3 extends ProblemaAutomatos implements Serializable
     }
 
     public boolean validarRespostaUsuario(){
+        boolean estadoIncial = false;
+        boolean transicoes = false;
+
+        for (int i = 0; i < getResposta_secundaria().size(); i++) {
+            if (getResposta_secundaria().get(i).getEstado_inicial())
+                estadoIncial = true;
+            if (getResposta_secundaria().get(i).getTransicoes().size() > 0)
+                transicoes = true;
+            if (estadoIncial && transicoes)
+                break;
+        }
+
+        if (!estadoIncial || !transicoes)
+            return false;
+
         EntradaAFND afndResposta = converterEntradaAFND(automato.getEstados());
         EntradaAFND afndUsuario = converterEntradaAFND(getResposta_secundaria());
 
