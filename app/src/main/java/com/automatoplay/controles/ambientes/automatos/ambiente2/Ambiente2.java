@@ -118,17 +118,17 @@ public class Ambiente2 {
                 new AFD("q0_true_false & q1_false_true",
                         "q0_a_q1 & q0_b_q0 & q1_b_q0 & q1_a_q1",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//16
-                "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que terminam com ‘ab’.",
+                "Construa o Autômato Finito Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que terminam com ‘ab’.",
                 new AFD("q0_true_false & q1_false_false & q2_false_true",
-                        "q0_a_q1 & q0_b_q0 & q1_a_q1 & q1_b_q2 & q2_a_q0 & q2_b_q0",new String[]{"a", "b"})));
+                        "q0_a_q1 & q0_b_q0 & q1_a_q1 & q1_b_q2 & q2_a_q1 & q2_b_q0",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//17
                 "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que terminam com ‘aab’.",
                 new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_true",
                         "q0_b_q0 & q0_a_q1 & q1_b_q0 & q1_a_q2 & q2_a_q2 & q2_b_q2 & q3_a,b_q0",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//18
-                "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que tem a ‘a’ como subcadeia.",
+                "Construa o Autômato Finito Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que tem a ‘a’ como subcadeia.",
                 new AFD("q0_true_false & q1_false_true",
-                        "q0_a_q1 & q0_b_q1 & q1_a_q1 & q1_b_q1",new String[]{"a", "b"})));
+                        "q0_a_q1 & q0_b_q0 & q1_a_q1 & q1_b_q1",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//19
                 "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que tem a ‘ab’ como subcadeia.",
                 new AFD("q0_true_false & q1_false_false & q2_false_true",
@@ -142,9 +142,9 @@ public class Ambiente2 {
                 new AFD("q0_true_false & q1_false_false & q2_false_true & q3_false_false",
                         "q0_b_q1 & q1_b_q1 & q1_a_q2 & q2_a,b_q2 & q0_a_q3 & q3_a,b_q3",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//22
-                "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que tem a ‘ab’ como subcadeia mas não como prefixo, isto é não pode começar com a subcadeia em questão.",
+                "Construa o Autômato Finito Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que tem a ‘ab’ como subcadeia mas não como prefixo, isto é não pode começar com a subcadeia em questão.",
                 new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_true",
-                        "q0_a_q1 & q0_b_q1 & q1_a_q3 & q1_b_q2 & q2_a_q2 & q2_b_q3 & q3_a_q3 & q3_b_q4 & q4_a_q4 & q4_b_q4",new String[]{"a", "b"})));
+                        "q0_a_q1 & q0_b_q1 & q1_a_q3 & q1_b_q2 & q2_a_q2 & q2_b_q2 & q3_a_q3 & q3_b_q4 & q4_a_q4 & q4_b_q4",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//23
                 "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} que tem a ‘aab’ como subcadeia mas não como prefixo, isto é não pode começar com a subcadeia em questão.",
                 new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_true & q5_false_false",
@@ -246,9 +246,9 @@ public class Ambiente2 {
                 new AFD("q0_true_true & q1_false_false & q2_false_false & q3_false_false & q4_false_false & q5_false_false",
                         "q0_a_q1 & q0_b_q3 & q1_a_q0 & q1_b_q2 & q2_a,b_q2 & q3_a_q5 & q3_b_q4 & q4_a_q5 & q4_b_q0 & q5_a,b_q5",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//48
-                "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular (aa+bbb)(a+b)*.",
-                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_false & q4_false_false & q5_false_true",
-                        "q0_a_q1 & q0_b_q2 & q1_a_q5 & q1_b_q4 & q2_a_q4 & q2_b_q3 & q3_a_q4 & q3_b_q5 & q4_a,b_q4 & q5_a,b_q5",new String[]{"a", "b"})));
+                "Construa o Autômato Finito Determinístico que aceita todas as cadeias representadas pela Expressão Regular (aa+bbb)(a+b)*.",
+                new AFD("q0_true_false & q1_false_false & q2_false_true & q3_false_false & q4_false_false & q5_false_false",
+                        "q0_a_q1 & q0_b_q3 & q1_a_q2 & q1_b_q5 & q2_a_q2 & q2_b_q2 & q3_a_q5 & q3_b_q4 & q4_a_q5 & q4_b_q2 & q5_a_q5 & q5_b_q5",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//49
                 "Construa o Autômato Determinístico que aceita todas as cadeias representadas pela Expressão Regular ((aa+bbb)(a+b)*)*.",
                 new AFD("q0_true_false & q1_false_false & q2_false_true & q3_false_false & q4_false_false & q5_false_false",
