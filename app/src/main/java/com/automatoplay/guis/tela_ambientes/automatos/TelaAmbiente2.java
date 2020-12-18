@@ -783,10 +783,10 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
     public void clickProblema(){
         String texto = "";
         if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null) {
-            texto = ("&Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente2().getProblema());
+            texto = ("&" + Controler.getControler().getQuestaoSelecionadaAmbiente2().getNumero() + "° Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente2().getProblema());
         }
         else if(Controler.getControler().getQuestaoSelecionadaAmbiente3() != null){
-            texto = ("&Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente3().getProblema());
+            texto = ("&" + Controler.getControler().getQuestaoSelecionadaAmbiente3().getNumero() + "° Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente3().getProblema());
         }
 
         PopUpCustomizado pop = new PopUpCustomizado("Problema", texto);
