@@ -65,17 +65,23 @@ public class ProblemaAmbiente3 extends ProblemaAutomatos implements Serializable
         String estadosFinais = "{";
 
         ArrayList<String> trasicoesAux = new ArrayList<>();
+        String[] simbolosAlfabeto = new String[automato.getAlfabeto().length + 1];
+        for (int i = 0; i < automato.getAlfabeto().length;i++){
+            simbolosAlfabeto[i] = automato.getAlfabeto()[i];
+        }
+        simbolosAlfabeto[automato.getAlfabeto().length] = "e";
         for(int i = 0; i < listaEstados.size(); i++) {
             estados += listaEstados.get(i).getNome() + (i < (listaEstados.size() - 1) ? "," : "");
             if (listaEstados.get(i).getEstado_aceitacao())
                 estadosFinais += listaEstados.get(i).getNome() + ",";
-            for (int j = 0; j < automato.getAlfabeto().length; j++) {
-                String transicao = "(" + listaEstados.get(i).getNome() + "," + automato.getAlfabeto()[j] + ")->{";
+            //for (int j = 0; j < automato.getAlfabeto().length; j++) {
+            for (int j = 0; j < simbolosAlfabeto.length; j++) {
+                String transicao = "(" + listaEstados.get(i).getNome() + "," + simbolosAlfabeto[j] + ")->{";
                 boolean existe = false;
                 for (int x = 0; x < listaEstados.get(i).getTransicoes().size(); x++) {
                     for (int y = 0; y < listaEstados.get(i).getTransicoes().get(x).getSimbolo_alfabeto().length ; y++) {
                         if (listaEstados.get(i).getTransicoes().get(x).getSimbolo_alfabeto()[y].equals(
-                                automato.getAlfabeto()[j])) {
+                                simbolosAlfabeto[j])) {
                             transicao += listaEstados.get(i).getTransicoes().get(x).getEstadoDestino().getNome() + ",";
                             existe = true;
                         }
