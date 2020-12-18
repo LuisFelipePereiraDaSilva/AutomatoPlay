@@ -50,15 +50,18 @@ public class ItemTelaCriacaoSeta extends Activity {
 
     public boolean verificarSimbolosExiste(String[] simbolos){
         String[] alfabeto;
+        boolean afd = true;
         if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
             alfabeto = Controler.getControler().getQuestaoSelecionadaAmbiente2().getAutomato().getAlfabeto();
-        else
+        else {
             alfabeto = Controler.getControler().getQuestaoSelecionadaAmbiente3().getAutomato().getAlfabeto();
+            afd = false;
+        }
         boolean flag = false;
         for(int i = 0; i < simbolos.length; i++){
             flag = false;
             for(int j = 0; j < alfabeto.length; j++){
-                if(simbolos[i].equals(alfabeto[j])) {
+                if(simbolos[i].equals(alfabeto[j]) || (simbolos[i].equals("e")  && !afd)) {//modifiquei aqui para testar
                     flag = true;
                     break;
                 }
