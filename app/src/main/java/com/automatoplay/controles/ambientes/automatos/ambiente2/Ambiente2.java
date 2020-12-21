@@ -93,15 +93,15 @@ public class Ambiente2 {
                 "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} de comprimento ímpar.",
                 new AFD("q0_true_false & q1_false_true & q2_false_false",
                         "q0_a,b_a1 & q1_a,b_q2 & q2_a,b_q1",new String[]{"a", "b"})));
-        lista_problemas.add(montarQuestao(lista_problemas.size()+1,//10
+        lista_problemas.add(montarQuestao(lista_problemas.size()+1,//q10
                 "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} de comprimento múltiplo de 3.",
-                new AFD("q0_true_false & q1_false_false & q2_false_false & q3_false_true",
-                        "q0_a_q1 & q0_b_q1 & q1_a_q2 & q1_b_q2 & q2_a_q3 & q2_b_q3 & q3_a_q1 & q3_b_q1",new String[]{"a", "b"})));
+                new AFD("q0_true_true & q1_false_false & q2_false_false",
+                        "q0_a,b_q1 & q1_a,b_q2 & q2_a,b_q0",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//q11
                 "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} de comprimento múltiplo de 4.",
                 new AFD("q0_true_true & q1_false_false & q2_false_false & q3_false_false",
                         "q0_a,b_q1 & q1_a,b_q2 & q2_a,b_q3 & q3_a,b_q0 ",new String[]{"a", "b"})));
-        lista_problemas.add(montarQuestao(lista_problemas.size()+1,//12
+        lista_problemas.add(montarQuestao(lista_problemas.size()+1,//q12
                 "Construa o Autômato Determinístico que aceita todas as cadeias que começam com ‘a’ sobre o alfabeto {a,b}.",
                 new AFD("q0_true_false & q1_false_false & q2_false_true",
                         "q0_a_q2 & q0_b_q1 & q1_a_q1 & q1_b_q1 & q2_a_q2 & q2_b_q2",new String[]{"a", "b"})));
