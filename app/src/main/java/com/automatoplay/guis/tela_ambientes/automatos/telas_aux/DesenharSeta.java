@@ -10,8 +10,8 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.automatoplay.controles.ambientes.automatos.Transicao;
 import com.automatoplay.controles.ambientes.automatos.Estado;
+import com.automatoplay.controles.ambientes.automatos.Transicao;
 import com.automatoplay.fachadas.GUI;
 
 import java.util.ArrayList;

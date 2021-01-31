@@ -1,5 +1,6 @@
 package com.automatoplay.controles.ambientes.automatos.ambiente2;
 
+import com.automatoplay.controles.ambientes.ProblemaAmbientes;
 import com.automatoplay.controles.ambientes.automatos.Estado;
 import com.automatoplay.controles.ambientes.automatos.ProblemaAutomatos;
 import com.automatoplay.fachadas.Controler;
@@ -31,7 +32,7 @@ public class ProblemaAmbiente2 extends ProblemaAutomatos implements Serializable
     }
 
     @Override
-    public void setStatus_resposta(StatusResposta status_resposta) {
+    public void setStatus_resposta(ProblemaAmbientes.StatusResposta status_resposta) {
         super.setStatus_resposta(status_resposta);
         Controler.getControler().salvarProblemaAmbiente2(this);
     }
