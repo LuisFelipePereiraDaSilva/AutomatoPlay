@@ -92,7 +92,7 @@ public class Ambiente2 {
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//q9
                 "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} de comprimento ímpar.",
                 new AFD("q0_true_false & q1_false_true & q2_false_false",
-                        "q0_a,b_a1 & q1_a,b_q2 & q2_a,b_q1",new String[]{"a", "b"})));
+                        "q0_a,b_q1 & q1_a,b_q2 & q2_a,b_q1",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//q10
                 "Construa o Autômato Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} de comprimento múltiplo de 3.",
                 new AFD("q0_true_true & q1_false_false & q2_false_false",
