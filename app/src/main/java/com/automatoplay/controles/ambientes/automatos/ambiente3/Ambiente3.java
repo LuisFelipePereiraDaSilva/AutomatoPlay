@@ -72,8 +72,8 @@ public class Ambiente3 {
                         "q0_a_q1 & q1_a_q2 & q2_b_q3",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1, //q4
                 "Construa o Autômato Não Determinístico que aceita a linguagem {a, ab} sobre o alfabeto {a,b}.",
-                new AFND("q0_true_false & q1_false_false & q2_false_true & q3_false_true",
-                        "q0_a_q2 & q0_b_q1 & q1_a_q1 & q1_b_q1 & q2_a_q1 & q2_b_q3 & q3_a_q1 & q3_b_q1",new String[]{"a", "b"})));
+                new AFND("q0_true_false & q1_false_true & q2_false_true",
+                        "q0_a_q1 & q1_b_q2",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,
                 "Construa o Autômato Não Determinístico que aceita a linguagem {a, ab, aab} sobre o alfabeto {a,b}.",
                 new AFND("q0_true_false & q1_false_true & q2_false_true & q3_false_false",
@@ -81,19 +81,19 @@ public class Ambiente3 {
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//q6
                 "Construa o Autômato Não Determinístico que aceita apenas a cadeia vazia.",
                 new AFND("q0_true_true",
-                        "q0_e_q0",new String[]{"a","b"})));
+                        "q0_e_q0",new String[]{"a","b", "e"})));//q7
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,
                 "Construa o Autômato Não Determinístico com linguagem vazia, isto é, não aceita nenhuma cadeia.",
                 new AFND("q0_true_false",
-                        "q0_e_q0",new String[]{"a", "b"})));
+                        "q0_e_q0",new String[]{"a", "b", "e"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//q8
                 "Construa o Autômato Não Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} de comprimento par.",
                 new AFND("q0_true_false & q1_false_false & q2_false_true",
                         "q0_a_q1 & q0_b_q1 & q1_a_q2 & q1_b_q2 & q2_a_q1 & q2_b_q1",new String[]{"a", "b"})));
-        lista_problemas.add(montarQuestao(lista_problemas.size()+1,
+        lista_problemas.add(montarQuestao(lista_problemas.size()+1,//q9
                 "Construa o Autômato Não Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} de comprimento ímpar.",
                 new AFND("q0_true_false & q1_false_true & q2_false_false",
-                        "q0_a,b_a1 & q1_a,b_q2 & q2_a,b_q1",new String[]{"a", "b"})));
+                        "q0_a,b_q1 & q1_a,b_q2 & q2_a,b_q1",new String[]{"a", "b"})));
         lista_problemas.add(montarQuestao(lista_problemas.size()+1,//10
                 "Construa o Autômato Não Determinístico que aceita todas as cadeias sobre o alfabeto {a,b} de comprimento múltiplo de 3.",
                 new AFND("q0_true_false & q1_false_false & q2_false_false & q3_false_true",

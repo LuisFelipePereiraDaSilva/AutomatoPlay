@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.automatoplay.R;
 import com.automatoplay.controles.ambientes.automatos.Estado;
 import com.automatoplay.fachadas.Controler;
 import com.automatoplay.fachadas.GUI;
+
+import java.util.ArrayList;
 
 public class ItemTelaCriacaoAutomato extends Activity {
 
@@ -59,6 +62,24 @@ public class ItemTelaCriacaoAutomato extends Activity {
     public void clickConfirmacao(View view){
         CheckBox b = findViewById(R.id.id_criacao_automato_estado_aceitacao);
         EditText e = findViewById(R.id.id_criacao_automato_nome);
+
+        if (e.getText().toString().equals("")) {
+            Toast.makeText(this, "Adicione uma descrição para o estado", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            ArrayList<Estado> estados = null;
+            if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
+                estados = Controler.getControler().getQuestaoSelecionadaAmbiente2().getResposta_secundaria();
+            else
+                estados = Controler.getControler().getQuestaoSelecionadaAmbiente3().getResposta_secundaria();
+
+            for (int i = 0; i < estados.size(); i++) {
+                if (estados.get(i).getNome().equals(e.getText().toString())) {
+                    Toast.makeText(this, "Já existe um estado com essa descrição", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+        }
         estado.setNome(e.getText().toString());
         CheckBox b3 = findViewById(R.id.id_criacao_automato_estado_inicial);
         estado.setEstado_inicial(b3.isChecked());

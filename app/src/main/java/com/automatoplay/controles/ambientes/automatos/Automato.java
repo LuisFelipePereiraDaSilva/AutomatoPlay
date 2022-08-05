@@ -27,30 +27,32 @@ public class Automato implements Serializable {
     //region Transicoes
 
     private void adicionarTransicoes(String transicoes){
-        String[] transicoes2 = transicoes.replace(" ", "").split("&");
-        for(int i = 0; i < transicoes2.length; i++){
-            String[] transicoes3 = transicoes2[i].split("_");
-            Estado estado1 = null;
-            Estado estado2 = null;
-            for(int j = 0; j < estados.size(); j++){
-                if(transicoes3[0].equals(estados.get(j).getNome())){
-                    estado1 = estados.get(j);
-                }
-                if(transicoes3[2].equals(estados.get(j).getNome())){
-                    estado2 = estados.get(j);
-                }
-                if(estado1 != null && estado2 != null){
-                    boolean flag = false;
-                    for(int x = 0; x < estado1.getTransicoes().size(); x++){
-                        if(estado1.getTransicoes().get(x).getEstadoDestino() == estado2){
-                            estado1.getTransicoes().get(x).editarSimbolosTransicao(transicoes3[1]);
-                            flag = true;
-                            break;
-                        }
+        if (!transicoes.equals("")) {
+            String[] transicoes2 = transicoes.replace(" ", "").split("&");
+            for (int i = 0; i < transicoes2.length; i++) {
+                String[] transicoes3 = transicoes2[i].split("_");
+                Estado estado1 = null;
+                Estado estado2 = null;
+                for (int j = 0; j < estados.size(); j++) {
+                    if (transicoes3[0].equals(estados.get(j).getNome())) {
+                        estado1 = estados.get(j);
                     }
-                    if(!flag)
-                        estado1.adicionarTransicao(transicoes3[1].split(","), estado2);
-                    break;
+                    if (transicoes3[2].equals(estados.get(j).getNome())) {
+                        estado2 = estados.get(j);
+                    }
+                    if (estado1 != null && estado2 != null) {
+                        boolean flag = false;
+                        for (int x = 0; x < estado1.getTransicoes().size(); x++) {
+                            if (estado1.getTransicoes().get(x).getEstadoDestino() == estado2) {
+                                estado1.getTransicoes().get(x).editarSimbolosTransicao(transicoes3[1]);
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (!flag)
+                            estado1.adicionarTransicao(transicoes3[1].split(","), estado2);
+                        break;
+                    }
                 }
             }
         }
