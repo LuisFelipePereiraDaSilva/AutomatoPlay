@@ -184,7 +184,13 @@ public class Conversor {
         for(int i = 0; i < estadosAux.length;i++){
             if(estadosAF.get(estadosAux[i]) == null){
                 Estado teste = new Estado();
-                teste.setInicial(false);
+
+                if (estadosAux[i].equals(estadoInicial)) {
+                    teste.setInicial(true);
+                } else {
+                    teste.setInicial(false);
+                }
+
                 if(Utils.Exists(estFinal,estadosAux[i])){
                     teste.setFinal(true);
                 }else {

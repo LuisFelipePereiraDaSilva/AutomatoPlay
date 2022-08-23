@@ -867,6 +867,23 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
                 (Controler.getControler().getQuestaoSelecionadaAmbiente3() != null &&
                         Controler.getControler().getQuestaoSelecionadaAmbiente3().getResposta_secundaria().size() > 0)) {
 
+            ArrayList<Estado> estadosAux = null;
+            if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
+                estadosAux = Controler.getControler().getQuestaoSelecionadaAmbiente2().getResposta_secundaria();
+            else
+                estadosAux = Controler.getControler().getQuestaoSelecionadaAmbiente3().getResposta_secundaria();
+
+            boolean estado_inicial = false;
+            for (int i = 0; i < estadosAux.size(); i++)
+                if (estadosAux.get(i).getEstado_inicial()) {
+                    estado_inicial = true;
+                    break;
+                }
+            if (!estado_inicial) {
+                mensagemExibir("Resultado", "Defina um estado inicial.");
+                return;
+            }
+
             boolean resultado = false;
             if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null)
                 resultado = Controler.getControler().getQuestaoSelecionadaAmbiente2().validarRespostaUsuario();
