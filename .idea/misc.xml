@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/activity_ambiente2.xml" value="0.5541666666666667" />
-        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/tela_ambiente2.xml" value="0.5541666666666667" />
-        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/tela_inicial_ambiente2.xml" value="0.5541666666666667" />
-        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/tela_inicial_ambiente3.xml" value="0.5541666666666667" />
+        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/content_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/tela_inicial.xml" value="0.5541666666666667" />
+        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/tela_inicial_ambiente2.xml" value="0.24909420289855072" />
+        <entry key="..\:/MeusProgramas/Faculdade/Automato Play/12/AutomatoPlay/app/src/main/res/layout/tela_inicial_ambiente3.xml" value="0.24909420289855072" />
       </map>
     </option>
   </component>

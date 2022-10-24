@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.automatoplay.R;
-import com.automatoplay.controles.ambientes.automatos.Transicao;
 import com.automatoplay.controles.ambientes.automatos.Estado;
+import com.automatoplay.controles.ambientes.automatos.Transicao;
 import com.automatoplay.fachadas.Controler;
 import com.automatoplay.fachadas.GUI;
 

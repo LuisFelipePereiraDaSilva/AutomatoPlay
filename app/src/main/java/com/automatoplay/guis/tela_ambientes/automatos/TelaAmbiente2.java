@@ -22,8 +22,8 @@ import android.widget.Toast;
 
 import com.automatoplay.R;
 import com.automatoplay.controles.ambientes.ProblemaAmbientes;
-import com.automatoplay.controles.ambientes.automatos.Transicao;
 import com.automatoplay.controles.ambientes.automatos.Estado;
+import com.automatoplay.controles.ambientes.automatos.Transicao;
 import com.automatoplay.fachadas.Controler;
 import com.automatoplay.fachadas.GUI;
 import com.automatoplay.guis.tela_ambientes.automatos.telas_aux.DesenharSeta;
@@ -31,9 +31,9 @@ import com.automatoplay.guis.tela_ambientes.automatos.telas_aux.ItemTelaAtualiza
 import com.automatoplay.guis.tela_ambientes.automatos.telas_aux.ItemTelaAtualizacaoSeta;
 import com.automatoplay.guis.tela_ambientes.automatos.telas_aux.ItemTelaCriacaoAutomato;
 import com.automatoplay.guis.tela_ambientes.automatos.telas_aux.ItemTelaCriacaoSeta;
-import com.automatoplay.guis.tela_ambientes.telas_aux.PopUpCustomizado;
 import com.automatoplay.guis.tela_ambientes.automatos.telas_aux.ItemTelaRespostaAutomato;
 import com.automatoplay.guis.tela_ambientes.automatos.telas_aux.ItemTelaTabela;
+import com.automatoplay.guis.tela_ambientes.telas_aux.PopUpCustomizado;
 
 import java.util.ArrayList;
 
@@ -783,10 +783,10 @@ public class TelaAmbiente2 extends AppCompatActivity implements AdapterView.OnIt
     public void clickProblema(){
         String texto = "";
         if(Controler.getControler().getQuestaoSelecionadaAmbiente2() != null) {
-            texto = ("&Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente2().getProblema());
+            texto = ("&" + Controler.getControler().getQuestaoSelecionadaAmbiente2().getNumero() + "° Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente2().getProblema());
         }
         else if(Controler.getControler().getQuestaoSelecionadaAmbiente3() != null){
-            texto = ("&Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente3().getProblema());
+            texto = ("&" + Controler.getControler().getQuestaoSelecionadaAmbiente3().getNumero() + "° Problema:& " + Controler.getControler().getQuestaoSelecionadaAmbiente3().getProblema());
         }
 
         PopUpCustomizado pop = new PopUpCustomizado("Problema", texto);

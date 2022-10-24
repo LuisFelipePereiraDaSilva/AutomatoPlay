@@ -215,10 +215,10 @@ public class Conversor {
         String estadosAux = "";
         String nomeEstadoAFND = "";
         String nomeEstadoAF = "";
-        for(Map.Entry<String,Estado> auxAFND : afndLamb.getEstados().entrySet()){
+        for(Map.Entry<String, Estado> auxAFND : afndLamb.getEstados().entrySet()){
             nomeEstadoAFND = auxAFND.getKey();
             if(auxAFND.getValue().isInicial()){
-                for (Map.Entry<String,Estado> auxAF : afd.getEstados().entrySet()){
+                for (Map.Entry<String, Estado> auxAF : afd.getEstados().entrySet()){
                     nomeEstadoAF = auxAF.getKey();
                     if(nomeEstadoAF.equals(nomeEstadoAFND)){
                         auxAF.getValue().setInicial(true);
@@ -226,7 +226,7 @@ public class Conversor {
                 }
             }
             if (auxAFND.getValue().isFinal()){
-                for (Map.Entry<String,Estado> auxAF : afd.getEstados().entrySet()){
+                for (Map.Entry<String, Estado> auxAF : afd.getEstados().entrySet()){
                     nomeEstadoAF = auxAF.getKey();
                     if(nomeEstadoAF.contains(nomeEstadoAFND)){
                         auxAF.getValue().setFinal(true);
@@ -259,7 +259,7 @@ public class Conversor {
                 if (loop.getValue().getTransicao().get(entrada) == null) {
                     //System.out.println("\t\t\t\t\t\t " + "-" + " ");
                 } else {
-                    transicaoAux = loop.getKey()+"_"+entrada+"_"+Utils.arrayToString(loop.getValue().getTransicao().get(entrada).getCaminhos());
+                    transicaoAux = loop.getKey()+"_"+entrada+"_"+ Utils.arrayToString(loop.getValue().getTransicao().get(entrada).getCaminhos());
                     //System.out.println(transicaoAux);
                     ///System.out.println(entrada+"\t\t\t\t\t\t<" + Utils.arrayToString(loop.getValue().getTransicao().get(entrada).getCaminhos()) + ">");
 
